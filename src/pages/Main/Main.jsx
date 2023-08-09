@@ -100,25 +100,27 @@ const Main = () => {
 
 	return (
 		<div className="font-light sm:flex sm:gap-4">
-			{/* CALENDAR */}
-			<Calendar
-				prevMonth={prevMonth}
-				today={today}
-				setToday={setToday}
-				nextMonth={nextMonth}
-				daysElement={daysElement}
-				dateElement={dateElement}
-			/>
+			<section className="flex flex-col gap-4 sm:w-1/2">
+				{/* CALENDAR */}
+				<Calendar
+					prevMonth={prevMonth}
+					today={today}
+					setToday={setToday}
+					nextMonth={nextMonth}
+					daysElement={daysElement}
+					dateElement={dateElement}
+				/>
 
-			<section className="flex flex-col gap-4 mt-4 sm:mt-0 sm:w-1/2">
 				{/* DATE CAROUSEL */}
 				<Carousel5Days
 					prev5days={prev5days}
 					render5DaysElement={render5DaysElement}
 					next5days={next5days}
 				/>
+			</section>
 
-				{/* ACTIVITIES */}
+			{/* ACTIVITIES */}
+			<section className="mt-4 sm:w-1/2 sm:mt-0">
 				<ActivitiesList
 					selectedDate={selectedDate}
 					filterActivitiesByDateArray={filterActivitiesByDateArray}

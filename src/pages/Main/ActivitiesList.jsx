@@ -11,7 +11,7 @@ const ActivitiesList = ({
 }) => {
 	return (
 		<Section>
-			<div className="flex justify-between">
+			<div className="flex justify-between w-full ">
 				<h2 className="mb-4">Activities</h2>
 				<h3>{format(selectedDate, "EEEE, dd MMMM yyyy")}</h3>
 			</div>

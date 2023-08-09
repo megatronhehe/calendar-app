@@ -17,7 +17,7 @@ const CarouselDateCard = ({ date, today, selectedDate, setSelectedDate }) => {
 		<li
 			onClick={() => setSelectedDate(date)}
 			key={date}
-			className={`flex flex-col items-center justify-center w-1/5 h-16 text-sm rounded-md 
+			className={`flex flex-col items-center justify-center w-1/5 h-20 text-sm rounded-md 
 					${sameMonth ? "" : "text-gray-300"}
 					${sameToday ? "bg-blue-300 text-white " : ""}
 					${sameSelectedAndToday ? " text-white bg-blue-500" : ""}
