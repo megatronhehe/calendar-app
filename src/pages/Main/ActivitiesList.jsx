@@ -37,14 +37,13 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 			{
 				id: createId(),
 				task: taskForm.task,
-				date:
-					typeof prev.date === "string"
-						? parseISO(taskForm.date)
-						: selectedDate,
+				date: taskForm.date ? parseISO(taskForm.date) : selectedDate,
 			},
 		]);
 		setTaskForm(initial_task_form);
 	};
+
+	console.log(activities);
 
 	const deleteTask = (id) => {
 		setActivities((prev) => prev.filter((task) => task.id !== id));
@@ -57,8 +56,6 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 			)
 		);
 	};
-
-	console.log(typeof taskForm.date);
 
 	const activitiesElement =
 		filterActivitiesByDateArray &&
