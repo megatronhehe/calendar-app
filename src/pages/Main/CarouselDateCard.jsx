@@ -2,7 +2,7 @@ import React from "react";
 
 import { isSameMonth, isToday, isSameDay, format } from "date-fns";
 
-import { BsSuitDiamondFill } from "react-icons/bs";
+import { BsSuitDiamondFill, BsCircleFill } from "react-icons/bs";
 
 const CarouselDateCard = ({
 	date,
@@ -15,9 +15,20 @@ const CarouselDateCard = ({
 	const sameToday = isToday(date);
 	const sameSelectedAndToday = isSameDay(date, selectedDate) && isToday(date);
 	const sameSelected = isSameDay(date, selectedDate);
-	const activitiesInThisDate = activities.some((activity) =>
+	const isActivitiesInThisDate = activities.some((activity) =>
 		isSameDay(activity.date, date)
 	);
+
+	const activitiesInThisDateArray = activities.filter((item) =>
+		isSameDay(item.date, date)
+	);
+	const countActivitiesInThisDateDone = activitiesInThisDateArray.filter(
+		(activity) => activity.isDone
+	).length;
+	const countActivitiesInThisDate = activitiesInThisDateArray.length;
+	const isAllActivitiesInThisDateDone =
+		countActivitiesInThisDate > 0 &&
+		countActivitiesInThisDateDone === countActivitiesInThisDate;
 
 	return (
 		<li
@@ -32,13 +43,18 @@ const CarouselDateCard = ({
 		>
 			<h1>{date.getDate()}</h1>
 			<h2 className="text-xs">{format(date, "EEE")}</h2>
-			{activitiesInThisDate && (
+			{isActivitiesInThisDate && (
 				<div
-					className={`absolute -bottom-1 ${
-						sameSelected ? "text-blue-800" : "text-blue-500"
-					}`}
+					className={`absolute -bottom-1 
+					${sameSelected ? "text-blue-800" : "text-blue-500"}
+					${isAllActivitiesInThisDateDone ? "text-green-300" : ""}
+					`}
 				>
-					<BsSuitDiamondFill size="12" />
+					{isAllActivitiesInThisDateDone ? (
+						<BsCircleFill size="12" />
+					) : (
+						<BsSuitDiamondFill size="12" />
+					)}
 				</div>
 			)}
 		</li>

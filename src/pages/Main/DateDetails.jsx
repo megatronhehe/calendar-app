@@ -10,19 +10,14 @@ import { FaClipboardList, FaCrown } from "react-icons/fa";
 
 const DateDetails = ({ selectedDate, filterActivitiesByDateArray }) => {
 	const countTasks = filterActivitiesByDateArray.length;
-	console.log(countTasks);
-
 	const countTasksDone = filterActivitiesByDateArray.filter(
 		(task) => task.isDone
 	).length;
-
 	const detailsTextElement =
 		countTasks < 1
 			? "you have no tasks for today"
 			: `you have ${countTasks} task${countTasks > 1 ? "s" : ""} for today!`;
-
 	const isAllTasksComplete = countTasks > 0 && countTasksDone === countTasks;
-
 	const percentageTextElement =
 		countTasks > 0 ? `${countPercentage(countTasksDone, countTasks)}%` : "0%";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BsFillSuitDiamondFill } from "react-icons/bs";
+import { BsFillSuitDiamondFill, BsCircleFill } from "react-icons/bs";
 
 import { isSameMonth, isToday, isSameDay } from "date-fns";
 
@@ -16,9 +16,20 @@ const CalendarDate = ({
 	const sameToday = isToday(date);
 	const sameSelectedAndToday = isSameDay(date, selectedDate) && isToday(date);
 	const sameSelected = isSameDay(date, selectedDate);
-	const activitiesInThisDate = activities.some((activity) =>
+	const isActivitiesInThisDate = activities.some((activity) =>
 		isSameDay(activity.date, date)
 	);
+
+	const activitiesInThisDateArray = activities.filter((item) =>
+		isSameDay(item.date, date)
+	);
+	const countActivitiesInThisDateDone = activitiesInThisDateArray.filter(
+		(activity) => activity.isDone
+	).length;
+	const countActivitiesInThisDate = activitiesInThisDateArray.length;
+	const isAllActivitiesInThisDateDone =
+		countActivitiesInThisDate > 0 &&
+		countActivitiesInThisDateDone === countActivitiesInThisDate;
 
 	return (
 		<li
@@ -31,13 +42,19 @@ const CalendarDate = ({
 			`}
 		>
 			{date.getDate()}
-			{activitiesInThisDate && (
+			{isActivitiesInThisDate && (
 				<div
-					className={`absolute -bottom-1  ${
-						sameSelected ? "text-blue-800" : "text-blue-500"
-					}`}
+					className={`absolute -bottom-1
+						${sameSelected ? "text-blue-800" : "text-blue-500"}
+						${isAllActivitiesInThisDateDone ? "text-green-300" : ""}
+						
+						`}
 				>
-					<BsFillSuitDiamondFill size="10" />
+					{isAllActivitiesInThisDateDone ? (
+						<BsCircleFill size="10" />
+					) : (
+						<BsFillSuitDiamondFill size="10" />
+					)}
 				</div>
 			)}
 		</li>
