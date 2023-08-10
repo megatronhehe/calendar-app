@@ -1,9 +1,10 @@
 import React from "react";
 
-import { BsCalendar3, BsFillBarChartFill } from "react-icons/bs";
-
 import NavButton from "./NavButton";
 
+import { NavLink } from "react-router-dom";
+
+import { BsCalendar3, BsFillBarChartFill } from "react-icons/bs";
 import { PiDiamondsFourFill } from "react-icons/pi";
 
 const NavbarPC = () => {
@@ -15,9 +16,12 @@ const NavbarPC = () => {
 						<PiDiamondsFourFill />
 					</button>
 					<div className="w-full border-b border-gray-500"></div>
-
-					<NavButton icon={<BsCalendar3 />} title={"activities"} />
-					<NavButton icon={<BsFillBarChartFill />} title={"dashboard"} />
+					<NavLink to="/">
+						<NavButton icon={<BsCalendar3 />} title={"activities"} />
+					</NavLink>
+					<NavLink to="/dashboard">
+						<NavButton icon={<BsFillBarChartFill />} title={"dashboard"} />
+					</NavLink>
 				</div>
 			</nav>
 		</>
