@@ -2,6 +2,8 @@ import React from "react";
 
 import Section from "../../components/Section";
 
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
 const Carousel5Days = ({ prev5days, render5DaysElement, next5days }) => {
 	return (
 		<Section>
@@ -9,16 +11,16 @@ const Carousel5Days = ({ prev5days, render5DaysElement, next5days }) => {
 			<ul className="relative flex gap-1 ">
 				<button
 					onClick={prev5days}
-					className="px-1 bg-gray-100 rounded-full hover:bg-gray-200"
+					className="bg-gray-100 rounded-full hover:bg-gray-200"
 				>
-					{"<"}
+					<BsChevronLeft />
 				</button>
 				{render5DaysElement}
 				<button
 					onClick={next5days}
-					className="px-1 bg-gray-100 rounded-full hover:bg-gray-200"
+					className="bg-gray-100 rounded-full hover:bg-gray-200"
 				>
-					{">"}
+					<BsChevronRight />
 				</button>
 			</ul>
 		</Section>

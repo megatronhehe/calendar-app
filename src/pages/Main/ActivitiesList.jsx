@@ -5,10 +5,13 @@ import { Context } from "../../context/Context";
 import { createId } from "../../utils/createId";
 
 import Section from "../../components/Section";
+import ModalForm from "../../components/ModalForm";
+
 import ActivityItem from "./ActivityItem";
 
-import ModalForm from "../../components/ModalForm";
-import { parse, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
+
+import { BsPlusCircle } from "react-icons/bs";
 
 const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 	// Context
@@ -43,8 +46,6 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 		setTaskForm(initial_task_form);
 	};
 
-	console.log(activities);
-
 	const deleteTask = (id) => {
 		setActivities((prev) => prev.filter((task) => task.id !== id));
 	};
@@ -74,9 +75,9 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 				<h2 className="">Activities</h2>
 				<button
 					onClick={() => setToggleModal(true)}
-					className="flex items-center justify-center w-6 h-6 text-white bg-blue-400 rounded-full"
+					className="flex items-center justify-center text-2xl text-blue-400 "
 				>
-					+
+					<BsPlusCircle />
 				</button>
 			</div>
 

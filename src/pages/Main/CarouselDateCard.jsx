@@ -2,6 +2,8 @@ import React from "react";
 
 import { isSameMonth, isToday, isSameDay, format } from "date-fns";
 
+import { BsSuitDiamondFill } from "react-icons/bs";
+
 const CarouselDateCard = ({
 	date,
 	today,
@@ -21,21 +23,23 @@ const CarouselDateCard = ({
 		<li
 			onClick={() => setSelectedDate(date)}
 			key={date}
-			className={`flex flex-col items-center justify-center w-1/5 h-20 text-sm rounded-md 
+			className={`flex flex-col items-center border justify-center w-1/5 h-20 text-sm rounded-md 
 					${sameMonth ? "" : "text-gray-300"}
-					${sameToday ? "bg-blue-300 text-white " : ""}
-					${sameSelectedAndToday ? " text-white bg-blue-500" : ""}
-					${sameSelected ? "bg-blue-400 text-white " : ""}
+					${sameToday ? "bg-blue-300 border-blue-300 text-white " : ""}
+					${sameSelectedAndToday ? " text-white bg-blue-500 border-blue-500" : ""}
+					${sameSelected ? "bg-blue-400 border-blue-400 text-white " : ""}
 					`}
 		>
 			<h1>{date.getDate()}</h1>
 			<h2 className="text-xs">{format(date, "EEE")}</h2>
 			{activitiesInThisDate && (
 				<div
-					className={`absolute bottom-2 w-1 h-1  rounded-full ${
-						sameSelected ? "bg-white" : "bg-blue-500"
+					className={`absolute -bottom-1 ${
+						sameSelected ? "text-blue-800" : "text-blue-500"
 					}`}
-				></div>
+				>
+					<BsSuitDiamondFill size="12" />
+				</div>
 			)}
 		</li>
 	);

@@ -5,7 +5,7 @@ import { Context } from "../../context/Context";
 import CalendarDate from "./CalendarDate";
 import CarouselDateCard from "./CarouselDateCard";
 import ActivitiesList from "./ActivitiesList";
-import Carousel5Days from "./Carousel5Days";
+import CarouselDates from "./CarouselDates";
 import Calendar from "./Calendar";
 import DateDetails from "./DateDetails";
 
@@ -72,7 +72,7 @@ const Main = () => {
 				/>
 
 				{/* DATE CAROUSEL */}
-				<Carousel5Days
+				<CarouselDates
 					prev5days={prev5days}
 					render5DaysElement={render5DaysElement}
 					next5days={next5days}

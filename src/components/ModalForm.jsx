@@ -1,13 +1,15 @@
 import React from "react";
 
+import { BsX } from "react-icons/bs";
+
 const ModalForm = ({ taskForm, handleTaskForm, setToggleModal, addTask }) => {
 	return (
 		<div
 			onClick={() => setToggleModal(false)}
 			className="fixed top-0 left-0 flex flex-col items-center justify-center w-full h-full gap-6 px-2 bg-gray-100 bg-opacity-60"
 		>
-			<button className="flex items-center justify-center w-12 h-12 p-2 text-white bg-red-300 rounded-full">
-				x
+			<button className="flex items-center justify-center w-12 h-12 p-2 text-xl text-white bg-red-300 rounded-full hover:bg-red-400">
+				<BsX />
 			</button>
 			<div
 				onClick={(e) => e.stopPropagation()}
@@ -39,8 +41,8 @@ const ModalForm = ({ taskForm, handleTaskForm, setToggleModal, addTask }) => {
 							addTask();
 							setToggleModal(false);
 						}}
-						className={`p-2   rounded-full ${
-							!taskForm.task ? "bg-gray-100" : "bg-green-400 text-white"
+						className={`p-2 rounded-full hover:bg-green-400 ${
+							!taskForm.task ? "bg-gray-100" : "bg-green-300 text-white"
 						}`}
 					>
 						ok

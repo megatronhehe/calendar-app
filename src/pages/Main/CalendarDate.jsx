@@ -1,5 +1,7 @@
 import React from "react";
 
+import { BsFillSuitDiamondFill } from "react-icons/bs";
+
 import { isSameMonth, isToday, isSameDay } from "date-fns";
 
 const CalendarDate = ({
@@ -31,10 +33,12 @@ const CalendarDate = ({
 			{date.getDate()}
 			{activitiesInThisDate && (
 				<div
-					className={`absolute bottom-1 w-1 h-1  rounded-full ${
-						sameSelected ? "bg-white" : "bg-blue-500"
+					className={`absolute -bottom-1  ${
+						sameSelected ? "text-blue-800" : "text-blue-500"
 					}`}
-				></div>
+				>
+					<BsFillSuitDiamondFill size="10" />
+				</div>
 			)}
 		</li>
 	);
