@@ -4,7 +4,6 @@ import { Context } from "../../context/Context";
 
 import CalendarDate from "./CalendarDate";
 import CarouselDateCard from "./CarouselDateCard";
-import ActivityItem from "./ActivityItem";
 import ActivitiesList from "./ActivitiesList";
 import Carousel5Days from "./Carousel5Days";
 import Calendar from "./Calendar";
@@ -59,12 +58,6 @@ const Main = () => {
 		);
 	});
 
-	const activitiesElement =
-		filterActivitiesByDateArray &&
-		filterActivitiesByDateArray.map((activity) => (
-			<ActivityItem key={activity.id} activity={activity} />
-		));
-
 	return (
 		<div className="font-light sm:flex sm:gap-4">
 			<section className="flex flex-col gap-4 sm:w-1/2">
@@ -96,7 +89,6 @@ const Main = () => {
 					<ActivitiesList
 						selectedDate={selectedDate}
 						filterActivitiesByDateArray={filterActivitiesByDateArray}
-						activitiesElement={activitiesElement}
 					/>
 				</div>
 			</section>

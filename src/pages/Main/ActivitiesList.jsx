@@ -5,20 +5,25 @@ import { Context } from "../../context/Context";
 import { createId } from "../../utils/createId";
 
 import Section from "../../components/Section";
+import ActivityItem from "./ActivityItem";
 
 import ModalForm from "../../components/ModalForm";
 import { parseISO } from "date-fns";
 
-const ActivitiesList = ({ filterActivitiesByDateArray, activitiesElement }) => {
+const ActivitiesList = ({ filterActivitiesByDateArray }) => {
 	// Context
 	const { activities, setActivities } = useContext(Context);
 
-	// States
-	const [taskForm, setTaskForm] = useState({
+	// initial_state
+	const initial_task_form = {
 		id: "",
 		task: "",
-		date: {},
-	});
+		date: "",
+		isDone: false,
+	};
+
+	// States
+	const [taskForm, setTaskForm] = useState(initial_task_form);
 	const [toggleModal, setToggleModal] = useState(false);
 
 	const handleTaskForm = (e) => {
@@ -35,10 +40,31 @@ const ActivitiesList = ({ filterActivitiesByDateArray, activitiesElement }) => {
 				date: parseISO(taskForm.date),
 			},
 		]);
-		setTaskForm("");
+		setTaskForm(initial_task_form);
 	};
 
-	console.log(taskForm);
+	const deleteTask = (id) => {
+		setActivities((prev) => prev.filter((task) => task.id !== id));
+	};
+
+	const markTaskDone = (id) => {
+		setActivities((prev) =>
+			prev.map((task) =>
+				task.id === id ? { ...task, isDone: !task.isDone } : task
+			)
+		);
+	};
+
+	const activitiesElement =
+		filterActivitiesByDateArray &&
+		filterActivitiesByDateArray.map((activity) => (
+			<ActivityItem
+				key={activity.id}
+				activity={activity}
+				deleteTask={deleteTask}
+				markTaskDone={markTaskDone}
+			/>
+		));
 
 	return (
 		<Section>

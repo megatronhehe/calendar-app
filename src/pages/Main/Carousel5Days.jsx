@@ -5,7 +5,7 @@ import Section from "../../components/Section";
 const Carousel5Days = ({ prev5days, render5DaysElement, next5days }) => {
 	return (
 		<Section>
-			<h2 className="mb-4">Last 5 days</h2>
+			<h2 className="mb-4">Last 5 days from today</h2>
 			<ul className="relative flex gap-1 ">
 				<button
 					onClick={prev5days}
