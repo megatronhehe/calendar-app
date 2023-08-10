@@ -27,16 +27,17 @@ const ContextProvider = ({ children }) => {
 	});
 
 	// States For Activities
-	const [activities, setActivities] = useState(activitiesData);
+	const [activities, setActivities] = useState([]);
 
 	// Variables
+	const isActivitiesExist = activities.length > 0;
 	const firstDate = startOfWeek(startOfMonth(today));
 	const lastDate = endOfWeek(endOfMonth(today));
 	const dateOfMonth = eachDayOfInterval({ start: firstDate, end: lastDate });
 	const render5DaysArray = eachDayOfInterval(dateCarousel);
-	const filterActivitiesByDateArray = activities.filter((activity) =>
-		isSameDay(activity.date, selectedDate)
-	);
+	const filterActivitiesByDateArray =
+		isActivitiesExist &&
+		activities.filter((activity) => isSameDay(activity.date, selectedDate));
 
 	// Functions For Dates
 	const nextMonth = () => {
@@ -79,6 +80,7 @@ const ContextProvider = ({ children }) => {
 				next5days,
 				activities,
 				setActivities,
+				isActivitiesExist,
 			}}
 		>
 			{children}

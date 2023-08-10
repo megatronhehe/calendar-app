@@ -10,22 +10,27 @@ const CarouselDateCard = ({
 	selectedDate,
 	setSelectedDate,
 	activities,
+	isActivitiesExist,
 }) => {
 	const sameMonth = isSameMonth(date, today);
 	const sameToday = isToday(date);
 	const sameSelectedAndToday = isSameDay(date, selectedDate) && isToday(date);
 	const sameSelected = isSameDay(date, selectedDate);
-	const isActivitiesInThisDate = activities.some((activity) =>
-		isSameDay(activity.date, date)
-	);
 
-	const activitiesInThisDateArray = activities.filter((item) =>
-		isSameDay(item.date, date)
-	);
-	const countActivitiesInThisDateDone = activitiesInThisDateArray.filter(
-		(activity) => activity.isDone
-	).length;
+	const isActivitiesInThisDate =
+		isActivitiesExist &&
+		activities.some((activity) => isSameDay(activity.date, date));
+
+	const activitiesInThisDateArray =
+		isActivitiesExist &&
+		activities.filter((item) => isSameDay(item.date, date));
+
+	const countActivitiesInThisDateDone =
+		isActivitiesExist &&
+		activitiesInThisDateArray.filter((activity) => activity.isDone).length;
+
 	const countActivitiesInThisDate = activitiesInThisDateArray.length;
+
 	const isAllActivitiesInThisDateDone =
 		countActivitiesInThisDate > 0 &&
 		countActivitiesInThisDateDone === countActivitiesInThisDate;

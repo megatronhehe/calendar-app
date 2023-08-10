@@ -23,6 +23,7 @@ const Main = () => {
 		prev5days,
 		next5days,
 		activities,
+		isActivitiesExist,
 	} = useContext(Context);
 
 	const daysArray = ["S", "M", "T", "W", "T", "F", "S"];
@@ -41,6 +42,7 @@ const Main = () => {
 				selectedDate={selectedDate}
 				setSelectedDate={setSelectedDate}
 				activities={activities}
+				isActivitiesExist={isActivitiesExist}
 			/>
 		);
 	});
@@ -54,6 +56,7 @@ const Main = () => {
 				selectedDate={selectedDate}
 				setSelectedDate={setSelectedDate}
 				activities={activities}
+				isActivitiesExist={isActivitiesExist}
 			/>
 		);
 	});
