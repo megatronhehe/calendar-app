@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
-import { activities } from "../../data/dummyActivitiesData";
+import { Context } from "../../context/Context";
 
 import CalendarDate from "./CalendarDate";
 import CarouselDateCard from "./CarouselDateCard";
@@ -8,60 +8,25 @@ import ActivityItem from "./ActivityItem";
 import ActivitiesList from "./ActivitiesList";
 import Carousel5Days from "./Carousel5Days";
 import Calendar from "./Calendar";
-
-import {
-	eachDayOfInterval,
-	endOfMonth,
-	startOfMonth,
-	addMonths,
-	startOfWeek,
-	endOfWeek,
-	isSameDay,
-	subMonths,
-	subDays,
-	addDays,
-} from "date-fns";
+import DateDetails from "./DateDetails";
 
 const Main = () => {
-	const [today, setToday] = useState(new Date());
-	const [selectedDate, setSelectedDate] = useState(today);
-	const [dateCarousel, setDateCarousel] = useState({
-		start: subDays(today, 4),
-		end: today,
-	});
+	const {
+		setToday,
+		today,
+		dateOfMonth,
+		selectedDate,
+		setSelectedDate,
+		render5DaysArray,
+		filterActivitiesByDateArray,
+		nextMonth,
+		prevMonth,
+		prev5days,
+		next5days,
+		activities,
+	} = useContext(Context);
 
-	const firstDate = startOfWeek(startOfMonth(today));
-	const lastDate = endOfWeek(endOfMonth(today));
-	const dateOfMonth = eachDayOfInterval({ start: firstDate, end: lastDate });
 	const daysArray = ["S", "M", "T", "W", "T", "F", "S"];
-	const render5DaysArray = eachDayOfInterval(dateCarousel);
-
-	const filterActivitiesByDateArray = activities.filter((activity) =>
-		isSameDay(activity.date, selectedDate)
-	);
-
-	const nextMonth = () => {
-		setToday((prev) => addMonths(prev, 1));
-	};
-
-	const prevMonth = () => {
-		setToday((prev) => subMonths(prev, 1));
-	};
-
-	const prev5days = () => {
-		setDateCarousel((prev) => ({
-			start: subDays(prev.start, 5),
-			end: subDays(prev.end, 5),
-		}));
-	};
-
-	const next5days = () => {
-		setDateCarousel((prev) => ({
-			start: addDays(prev.start, 5),
-			end: addDays(prev.end, 5),
-		}));
-	};
-
 	const daysElement = daysArray.map((day, i) => (
 		<li key={i} className="flex items-center justify-center w-8 h-8">
 			{day}
@@ -76,6 +41,7 @@ const Main = () => {
 				today={today}
 				selectedDate={selectedDate}
 				setSelectedDate={setSelectedDate}
+				activities={activities}
 			/>
 		);
 	});
@@ -88,6 +54,7 @@ const Main = () => {
 				today={today}
 				selectedDate={selectedDate}
 				setSelectedDate={setSelectedDate}
+				activities={activities}
 			/>
 		);
 	});
@@ -120,12 +87,18 @@ const Main = () => {
 			</section>
 
 			{/* ACTIVITIES */}
-			<section className="mt-4 sm:w-1/2 sm:mt-0">
-				<ActivitiesList
-					selectedDate={selectedDate}
-					filterActivitiesByDateArray={filterActivitiesByDateArray}
-					activitiesElement={activitiesElement}
-				/>
+			<section className="flex flex-col gap-4 mt-4 sm:w-1/2 sm:mt-0">
+				<div className="h-1/4">
+					<DateDetails selectedDate={selectedDate} />
+				</div>
+
+				<div className="h-3/4">
+					<ActivitiesList
+						selectedDate={selectedDate}
+						filterActivitiesByDateArray={filterActivitiesByDateArray}
+						activitiesElement={activitiesElement}
+					/>
+				</div>
 			</section>
 		</div>
 	);

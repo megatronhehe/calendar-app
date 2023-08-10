@@ -2,9 +2,13 @@ import React from "react";
 
 import { isSameMonth, isToday, isSameDay, format } from "date-fns";
 
-import { activities } from "../../data/dummyActivitiesData";
-
-const CarouselDateCard = ({ date, today, selectedDate, setSelectedDate }) => {
+const CarouselDateCard = ({
+	date,
+	today,
+	selectedDate,
+	setSelectedDate,
+	activities,
+}) => {
 	const sameMonth = isSameMonth(date, today);
 	const sameToday = isToday(date);
 	const sameSelectedAndToday = isSameDay(date, selectedDate) && isToday(date);

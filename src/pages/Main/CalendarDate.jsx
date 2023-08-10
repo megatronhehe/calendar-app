@@ -2,9 +2,14 @@ import React from "react";
 
 import { isSameMonth, isToday, isSameDay } from "date-fns";
 
-import { activities } from "../../data/dummyActivitiesData";
-
-const CalendarDate = ({ date, today, selectedDate, setSelectedDate }) => {
+const CalendarDate = ({
+	date,
+	today,
+	selectedDate,
+	setSelectedDate,
+	activities,
+}) => {
+	// Variables
 	const sameMonth = isSameMonth(date, today);
 	const sameToday = isToday(date);
 	const sameSelectedAndToday = isSameDay(date, selectedDate) && isToday(date);
