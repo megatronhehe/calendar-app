@@ -8,9 +8,9 @@ import Section from "../../components/Section";
 import ActivityItem from "./ActivityItem";
 
 import ModalForm from "../../components/ModalForm";
-import { parseISO } from "date-fns";
+import { parse, parseISO } from "date-fns";
 
-const ActivitiesList = ({ filterActivitiesByDateArray }) => {
+const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 	// Context
 	const { activities, setActivities } = useContext(Context);
 
@@ -37,7 +37,10 @@ const ActivitiesList = ({ filterActivitiesByDateArray }) => {
 			{
 				id: createId(),
 				task: taskForm.task,
-				date: parseISO(taskForm.date),
+				date:
+					typeof prev.date === "string"
+						? parseISO(taskForm.date)
+						: selectedDate,
 			},
 		]);
 		setTaskForm(initial_task_form);
@@ -54,6 +57,8 @@ const ActivitiesList = ({ filterActivitiesByDateArray }) => {
 			)
 		);
 	};
+
+	console.log(typeof taskForm.date);
 
 	const activitiesElement =
 		filterActivitiesByDateArray &&
