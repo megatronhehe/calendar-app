@@ -16,9 +16,9 @@ const Calendar = ({
 }) => {
 	return (
 		<Section>
-			<div className="h-96">
+			<div className=" h-96">
 				<div className="flex justify-between mt-4 mb-8 ">
-					<div className="flex items-center justify-between w-40 gap-4 text-gray-300 ">
+					<div className="flex items-center justify-between w-48 gap-4 text-gray-300 ">
 						<button
 							className="flex items-center justify-center w-8 h-8 rounded-full hover:text-blue-500 "
 							onClick={prevMonth}
@@ -40,7 +40,7 @@ const Calendar = ({
 							<BsCaretRightFill />
 						</button>
 					</div>
-					<h2 className="text-2xl">{format(today, "YYY")}</h2>
+					<h2 className="mr-5 text-2xl sm:mr-2">{format(today, "YYY")}</h2>
 				</div>
 				<ul className="grid grid-cols-7 gap-3 mb-4 font-semibold">
 					{daysElement}

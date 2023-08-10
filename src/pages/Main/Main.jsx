@@ -59,7 +59,7 @@ const Main = () => {
 	});
 
 	return (
-		<div className="font-light sm:flex sm:gap-4">
+		<div className="relative font-light sm:flex sm:gap-4">
 			<section className="flex flex-col gap-4 sm:w-1/2">
 				{/* CALENDAR */}
 				<Calendar
@@ -80,7 +80,7 @@ const Main = () => {
 			</section>
 
 			{/* ACTIVITIES */}
-			<section className="flex flex-col gap-4 mt-4 sm:w-1/2 sm:mt-0">
+			<section className="flex flex-col gap-4 mt-4 mb-20 sm:mb-0 sm:w-1/2 sm:mt-0">
 				<div className="h-1/4">
 					<DateDetails
 						selectedDate={selectedDate}

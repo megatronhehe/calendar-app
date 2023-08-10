@@ -28,7 +28,7 @@ const DateDetails = ({ selectedDate, filterActivitiesByDateArray }) => {
 
 	return (
 		<Section color={isAllTasksComplete ? "bg-green-400" : "bg-blue-500"}>
-			<div className="flex w-full h-48 gap-4 font-normal text-white sm:h-full">
+			<div className="flex w-full h-40 gap-4 font-normal text-white sm:h-full">
 				<div className="flex flex-col justify-between w-2/3 ">
 					<div className="text-xs h-1/2">
 						<h2 className="flex items-center gap-2 text-base">

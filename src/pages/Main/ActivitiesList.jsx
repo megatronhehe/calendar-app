@@ -84,7 +84,7 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 			{filterActivitiesByDateArray.length > 0 ? (
 				<div className="h-40">{activitiesElement}</div>
 			) : (
-				<div className="flex items-center justify-center text-gray-300">
+				<div className="flex items-center justify-center h-40 text-gray-300">
 					<p>no activities listed at this date</p>
 				</div>
 			)}
