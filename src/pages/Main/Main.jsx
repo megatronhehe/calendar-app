@@ -82,7 +82,10 @@ const Main = () => {
 			{/* ACTIVITIES */}
 			<section className="flex flex-col gap-4 mt-4 sm:w-1/2 sm:mt-0">
 				<div className="h-1/4">
-					<DateDetails selectedDate={selectedDate} />
+					<DateDetails
+						selectedDate={selectedDate}
+						filterActivitiesByDateArray={filterActivitiesByDateArray}
+					/>
 				</div>
 
 				<div className="h-3/4">

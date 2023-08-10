@@ -2,28 +2,61 @@ import React from "react";
 
 import Section from "../../components/Section";
 
+import { countPercentage } from "../../utils/countPercentage";
+
 import { format } from "date-fns";
 
-const DateDetails = ({ selectedDate }) => {
-	return (
-		<Section>
-			<div className="flex w-full h-full gap-4">
-				<div className="flex flex-col justify-between w-2/3 ">
-					<div>
-						<h1>{format(selectedDate, "EEEE")}</h1>
-						<h2 className="text-xs">{format(selectedDate, "dd MMMM yyyy")}</h2>
-					</div>
+import { FaClipboardList, FaCrown } from "react-icons/fa";
 
-					<div className="text-xs">
-						<p>5 tasks for today</p>
-						<p>5 / 5 tasks completed</p>
+const DateDetails = ({ selectedDate, filterActivitiesByDateArray }) => {
+	const countTasks = filterActivitiesByDateArray.length;
+	console.log(countTasks);
+
+	const countTasksDone = filterActivitiesByDateArray.filter(
+		(task) => task.isDone
+	).length;
+
+	const detailsTextElement =
+		countTasks < 1
+			? "you have no tasks for today"
+			: `you have ${countTasks} task${countTasks > 1 ? "s" : ""} for today!`;
+
+	const isAllTasksComplete = countTasks > 0 && countTasksDone === countTasks;
+
+	const percentageTextElement =
+		countTasks > 0 ? `${countPercentage(countTasksDone, countTasks)}%` : "0%";
+
+	return (
+		<Section color={isAllTasksComplete ? "bg-green-400" : "bg-blue-500"}>
+			<div className="flex w-full h-48 gap-4 font-normal text-white sm:h-full">
+				<div className="flex flex-col justify-between w-2/3 ">
+					<div className="text-xs h-1/2">
+						<h2 className="flex items-center gap-2 text-base">
+							<FaClipboardList />
+							Task
+						</h2>
+						<p>{detailsTextElement}</p>
+						{countTasks > 0 && (
+							<p>
+								{isAllTasksComplete
+									? "All tasks are completed!"
+									: `${countTasksDone} / ${countTasks} tasks completed`}
+							</p>
+						)}
+					</div>
+					<div
+						className={`w-1/2 py-2 text-xl text-center ${
+							isAllTasksComplete ? "bg-green-300" : "bg-blue-400"
+						} rounded-xl`}
+					>
+						{percentageTextElement}
 					</div>
 				</div>
-				<div className="flex flex-col justify-between w-1/3 gap-2 rounded-xl">
-					<h1 className="">Big Event!</h1>
-					<h2 className="flex items-center justify-center p-4 text-2xl bg-gray-100 rounded-xl">
-						50%
-					</h2>
+				<div className="flex flex-col items-end justify-between w-1/3 gap-2 text-xl rounded-xl">
+					<div>
+						<h1 className="font-extralight">{format(selectedDate, "EEEE")}</h1>
+						<h2 className="text-xs">{format(selectedDate, "dd MMMM yyyy")}</h2>
+					</div>
 				</div>
 			</div>
 		</Section>
