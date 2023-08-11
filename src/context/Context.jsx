@@ -68,8 +68,6 @@ const ContextProvider = ({ children }) => {
 		localStorage.setItem("events", JSON.stringify(events));
 	}, [activities, events]);
 
-	console.log(localStorage);
-
 	// Functions For Dates
 	const nextMonth = () => {
 		setToday((prev) => addMonths(prev, 1));

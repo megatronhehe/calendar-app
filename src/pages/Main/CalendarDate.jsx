@@ -48,10 +48,7 @@ const CalendarDate = ({
 	return (
 		<>
 			<li
-				onClick={() => {
-					setSelectedDate(date);
-					setToggle((prev) => !prev);
-				}}
+				onClick={() => setSelectedDate(date)}
 				className={`relative flex items-center justify-center rounded-full w-8 h-8 
 					${sameMonth ? "" : "text-gray-300"}
 					${sameToday ? "bg-blue-300 text-white " : ""}
