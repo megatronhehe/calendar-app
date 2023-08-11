@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { BsFillSuitDiamondFill, BsCircleFill } from "react-icons/bs";
+import { FaCrown } from "react-icons/fa";
 
 import { isSameMonth, isToday, isSameDay } from "date-fns";
 
@@ -11,18 +12,15 @@ const CalendarDate = ({
 	setSelectedDate,
 	activities,
 	isActivitiesExist,
+	events,
 }) => {
-	// State
-	const [toggle, setToggle] = useState(false);
-
-	// Function
-
 	// Variables
 	const sameMonth = isSameMonth(date, today);
 	const sameToday = isToday(date);
 	const sameSelectedAndToday = isSameDay(date, selectedDate) && isToday(date);
 	const sameSelected = isSameDay(date, selectedDate);
 
+	// activities variables
 	const isActivitiesInThisDate =
 		isActivitiesExist &&
 		activities.some((activity) => isSameDay(activity.date, date));
@@ -40,6 +38,12 @@ const CalendarDate = ({
 	const isAllActivitiesInThisDateDone =
 		countActivitiesInThisDate > 0 &&
 		countActivitiesInThisDateDone === countActivitiesInThisDate;
+
+	// events variables
+	const isEventsExist = events.length > 0;
+
+	const isEventsInThisDate =
+		isEventsExist && events.some((event) => isSameDay(event.date, date));
 
 	return (
 		<>
@@ -69,6 +73,12 @@ const CalendarDate = ({
 						) : (
 							<BsFillSuitDiamondFill size="10" />
 						)}
+					</div>
+				)}
+
+				{isEventsInThisDate && (
+					<div className="absolute text-lg text-yellow-300 -top-3">
+						<FaCrown />
 					</div>
 				)}
 			</li>

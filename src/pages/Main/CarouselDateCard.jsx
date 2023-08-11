@@ -3,6 +3,7 @@ import React from "react";
 import { isSameMonth, isToday, isSameDay, format } from "date-fns";
 
 import { BsSuitDiamondFill, BsCircleFill } from "react-icons/bs";
+import { FaCrown } from "react-icons/fa";
 
 const CarouselDateCard = ({
 	date,
@@ -11,12 +12,15 @@ const CarouselDateCard = ({
 	setSelectedDate,
 	activities,
 	isActivitiesExist,
+	events,
 }) => {
+	// Variables
 	const sameMonth = isSameMonth(date, today);
 	const sameToday = isToday(date);
 	const sameSelectedAndToday = isSameDay(date, selectedDate) && isToday(date);
 	const sameSelected = isSameDay(date, selectedDate);
 
+	// activities variables
 	const isActivitiesInThisDate =
 		isActivitiesExist &&
 		activities.some((activity) => isSameDay(activity.date, date));
@@ -34,6 +38,12 @@ const CarouselDateCard = ({
 	const isAllActivitiesInThisDateDone =
 		countActivitiesInThisDate > 0 &&
 		countActivitiesInThisDateDone === countActivitiesInThisDate;
+
+	// events variables
+	const isEventsExist = events.length > 0;
+
+	const isEventsInThisDate =
+		isEventsExist && events.some((event) => isSameDay(event.date, date));
 
 	return (
 		<li
@@ -60,6 +70,12 @@ const CarouselDateCard = ({
 					) : (
 						<BsSuitDiamondFill size="12" />
 					)}
+				</div>
+			)}
+
+			{isEventsInThisDate && (
+				<div className="absolute text-lg text-yellow-300 top-1">
+					<FaCrown />
 				</div>
 			)}
 		</li>

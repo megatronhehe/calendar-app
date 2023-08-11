@@ -33,6 +33,7 @@ const Main = () => {
 		setActivities,
 		isActivitiesExist,
 		filterActivitiesByDateArray,
+		events,
 		setEvents,
 		filterEventsByDateArray,
 	} = useContext(Context);
@@ -112,6 +113,7 @@ const Main = () => {
 				setSelectedDate={setSelectedDate}
 				activities={activities}
 				isActivitiesExist={isActivitiesExist}
+				events={events}
 			/>
 		);
 	});
@@ -126,6 +128,7 @@ const Main = () => {
 				setSelectedDate={setSelectedDate}
 				activities={activities}
 				isActivitiesExist={isActivitiesExist}
+				events={events}
 			/>
 		);
 	});
