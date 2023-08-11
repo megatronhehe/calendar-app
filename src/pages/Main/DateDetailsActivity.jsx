@@ -18,10 +18,10 @@ const DateDetailsActivity = ({
 	// Elements
 	const detailsTextElement =
 		countTasks < 1
-			? "you have no tasks for today"
+			? "no listed activities on this date . ."
 			: `you have ${countTasks ? countTasks : "no"} task${
 					countTasks > 1 ? "s" : ""
-			  } for today`;
+			  } on this date`;
 	const isAllTasksComplete = countTasks > 0 && countTasksDone === countTasks;
 
 	const percentageTextElement =

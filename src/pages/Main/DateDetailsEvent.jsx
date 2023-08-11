@@ -35,7 +35,7 @@ const DateDetailsEvent = ({
 		? `you have ${
 				filterEventsByDateArray.length > 1 ? "events" : "an event"
 		  } today!`
-		: "nothing big happening today";
+		: "nothing much really happening on this date . .";
 
 	return (
 		<section className="relative w-1/2 p-2 overflow-hidden text-gray-700 bg-yellow-300 rounded-xl">
