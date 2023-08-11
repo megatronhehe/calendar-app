@@ -31,17 +31,19 @@ const ActivitiesList = ({ setActivities, filterActivitiesByDateArray }) => {
 
 	return (
 		<Section>
-			<div className="flex items-center justify-between w-full mb-4">
-				<h2 className="">Activities</h2>
-			</div>
-
-			{filterActivitiesByDateArray.length > 0 ? (
-				<div className="h-40">{activitiesElement}</div>
-			) : (
-				<div className="flex items-center justify-center h-40 text-gray-300">
-					<p>no activities listed at this date</p>
+			<div className="h-full pr-2 overflow-y-auto">
+				<div className="flex items-center justify-between w-full mb-4 ">
+					<h2 className="">Activities</h2>
 				</div>
-			)}
+
+				{filterActivitiesByDateArray.length > 0 ? (
+					<div className="h-40">{activitiesElement}</div>
+				) : (
+					<div className="flex items-center justify-center h-40 text-gray-300">
+						<p>no activities listed at this date</p>
+					</div>
+				)}
+			</div>
 		</Section>
 	);
 };

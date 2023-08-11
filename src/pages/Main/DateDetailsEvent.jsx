@@ -40,16 +40,15 @@ const DateDetailsEvent = ({
 	return (
 		<section className="relative w-1/2 p-2 overflow-hidden text-gray-700 bg-yellow-300 rounded-xl">
 			<div className="flex flex-col justify-between h-40 text-xs font-normal sm:h-full">
-				<h2 className="flex items-center gap-2 text-base">
-					<FaCrown />
-					Event
-				</h2>
-
-				<div className="flex flex-col justify-between gap-2 overflow-x-auto text-xs rounded-xl">
-					<p>{detailsTextElement}</p>
+				<div>
+					<h2 className="flex items-center gap-2 text-base">
+						<FaCrown />
+						Event
+					</h2>
+					<p className="mt-2">{detailsTextElement}</p>
 				</div>
 
-				<div className="flex w-full gap-1 pb-2 overflow-auto h-1/2 ">
+				<div className="flex w-full gap-1 pb-1 overflow-auto h-1/2 ">
 					{eventsElement}
 				</div>
 				<button

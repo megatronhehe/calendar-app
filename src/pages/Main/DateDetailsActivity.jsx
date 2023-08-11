@@ -33,6 +33,46 @@ const DateDetailsActivity = ({
 				isAllTasksComplete ? "bg-green-400" : "bg-blue-500"
 			}`}
 		>
+			<div className="flex flex-col justify-between h-40 gap-2 text-xs font-normal text-white sm:h-full">
+				<div>
+					<h2 className="flex items-center gap-2 text-base">
+						<FaClipboardList />
+						Activities
+					</h2>
+					<p className="mt-2">{detailsTextElement}</p>
+					{countTasks > 0 && (
+						<p className="mt-2">
+							{isAllTasksComplete
+								? "All tasks are completed!"
+								: `${countTasksDone} / ${countTasks} tasks completed`}
+						</p>
+					)}
+				</div>
+				<div className="overflow-hidden text-lg font-semibold text-white bg-blue-400 rounded-xl">
+					<div
+						className="p-2 bg-green-300"
+						style={{ width: `${countPercentage(countTasksDone, countTasks)}%` }}
+					>
+						{percentageTextElement}
+					</div>
+				</div>
+				<button
+					onClick={() => setToggleModalActivityForm(true)}
+					className="absolute text-2xl top-2 right-2"
+				>
+					<BsPlusCircle />
+				</button>
+			</div>
+		</section>
+	);
+};
+
+{
+	/* <section
+			className={`relative p-2 w-1/2 rounded-xl ${
+				isAllTasksComplete ? "bg-green-400" : "bg-blue-500"
+			}`}
+		>
 			<div className="flex flex-col h-40 gap-2 text-xs font-normal text-white sm:h-full">
 				<h2 className="flex items-center gap-2 text-base">
 					<FaClipboardList />
@@ -54,8 +94,7 @@ const DateDetailsActivity = ({
 					<BsPlusCircle />
 				</button>
 			</div>
-		</section>
-	);
-};
+		</section> */
+}
 
 export default DateDetailsActivity;
