@@ -29,7 +29,7 @@ const DateDetailsActivity = ({
 
 	return (
 		<section
-			className={`relative p-4 w-1/2 rounded-xl ${
+			className={`relative p-2 w-1/2 rounded-xl ${
 				isAllTasksComplete ? "bg-green-400" : "bg-blue-500"
 			}`}
 		>
