@@ -2,15 +2,15 @@ import React from "react";
 
 import { BsX } from "react-icons/bs";
 
-const ModalForm = ({
+const ModalActivityForm = ({
 	activityForm,
 	handleActivityForm,
-	setToggleModal,
+	setToggleModalActivityForm,
 	addActivity,
 }) => {
 	return (
 		<div
-			onClick={() => setToggleModal(false)}
+			onClick={() => setToggleModalActivityForm(false)}
 			className="fixed top-0 left-0 z-20 w-full h-full gap-6 px-2 bg-gray-700 bg-opacity-60"
 		>
 			<div className="flex flex-col items-center justify-center h-full gap-2 -my-20">
@@ -45,7 +45,7 @@ const ModalForm = ({
 							onClick={(e) => {
 								e.preventDefault();
 								addActivity();
-								setToggleModal(false);
+								setToggleModalActivityForm(false);
 							}}
 							className={`p-2 rounded-full  ${
 								!activityForm.activity
@@ -66,4 +66,4 @@ const ModalForm = ({
 	);
 };
 
-export default ModalForm;
+export default ModalActivityForm;

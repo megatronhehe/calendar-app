@@ -1,6 +1,10 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import { Context } from "../../context/Context";
+
+import { createId } from "../../utils/createId";
+
+import parseISO from "date-fns/parseISO";
 
 import CalendarDate from "./CalendarDate";
 import CarouselDateCard from "./CarouselDateCard";
@@ -8,8 +12,10 @@ import ActivitiesList from "./ActivitiesList";
 import CarouselDates from "./CarouselDates";
 import Calendar from "./Calendar";
 import DateDetails from "./DateDetails";
+import ModalActivityForm from "./ModalActivityForm";
 
 const Main = () => {
+	// Context
 	const {
 		setToday,
 		today,
@@ -23,9 +29,42 @@ const Main = () => {
 		prev5days,
 		next5days,
 		activities,
+		setActivities,
 		isActivitiesExist,
 	} = useContext(Context);
 
+	// Inital state
+	const initial_activity_form = {
+		id: "",
+		activity: "",
+		date: "",
+		isDone: false,
+	};
+
+	// States
+	const [activityForm, setActivityForm] = useState(initial_activity_form);
+	const [toggleModalActivityForm, setToggleModalActivityForm] = useState(false);
+
+	// Functions
+	// Activity Functions
+	const handleActivityForm = (e) => {
+		const { value, name } = e.target;
+		setActivityForm((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const addActivity = () => {
+		setActivities((prev) => [
+			...prev,
+			{
+				id: createId(),
+				activity: activityForm.activity,
+				date: activityForm.date ? parseISO(activityForm.date) : selectedDate,
+			},
+		]);
+		setActivityForm(initial_activity_form);
+	};
+
+	// Elements
 	const daysArray = ["S", "M", "T", "W", "T", "F", "S"];
 	const daysElement = daysArray.map((day, i) => (
 		<li key={i} className="flex items-center justify-center w-8 h-8">
@@ -86,6 +125,7 @@ const Main = () => {
 			<section className="flex flex-col gap-4 mt-4 mb-20 sm:mb-0 sm:w-1/2 sm:mt-0">
 				<div className="h-1/4">
 					<DateDetails
+						setToggleModalActivityForm={setToggleModalActivityForm}
 						selectedDate={selectedDate}
 						filterActivitiesByDateArray={filterActivitiesByDateArray}
 					/>
@@ -98,6 +138,14 @@ const Main = () => {
 					/>
 				</div>
 			</section>
+			{toggleModalActivityForm && (
+				<ModalActivityForm
+					activityForm={activityForm}
+					handleActivityForm={handleActivityForm}
+					setToggleModalActivityForm={setToggleModalActivityForm}
+					addActivity={addActivity}
+				/>
+			)}
 		</div>
 	);
 };

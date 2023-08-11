@@ -7,13 +7,20 @@ import { countPercentage } from "../../utils/countPercentage";
 import { format } from "date-fns";
 
 import { FaClipboardList, FaCrown } from "react-icons/fa";
+import { BsPlusCircle } from "react-icons/bs";
 
-const DateDetails = ({ selectedDate, filterActivitiesByDateArray }) => {
+const DateDetails = ({
+	selectedDate,
+	filterActivitiesByDateArray,
+	setToggleModalActivityForm,
+}) => {
+	// Variables
 	const countTasks = filterActivitiesByDateArray.length;
 	const countTasksDone =
 		filterActivitiesByDateArray.length > 0 &&
 		filterActivitiesByDateArray.filter((task) => task.isDone).length;
 
+	// Elements
 	const detailsTextElement =
 		countTasks < 1
 			? "you have no tasks for today"
@@ -27,7 +34,7 @@ const DateDetails = ({ selectedDate, filterActivitiesByDateArray }) => {
 
 	return (
 		<Section color={isAllTasksComplete ? "bg-green-400" : "bg-blue-500"}>
-			<div className="flex w-full h-40 gap-4 font-normal text-white sm:h-full">
+			<div className="relative flex w-full h-40 gap-4 font-normal text-white sm:h-full">
 				<div className="flex flex-col justify-between w-2/3 ">
 					<div className="text-xs h-1/2">
 						<h2 className="flex items-center gap-2 text-base">
@@ -57,6 +64,12 @@ const DateDetails = ({ selectedDate, filterActivitiesByDateArray }) => {
 						<h2 className="text-xs">{format(selectedDate, "dd MMMM yyyy")}</h2>
 					</div>
 				</div>
+				<button
+					onClick={() => setToggleModalActivityForm(true)}
+					className="absolute bottom-0 right-0 text-2xl"
+				>
+					<BsPlusCircle />
+				</button>
 			</div>
 		</Section>
 	);
