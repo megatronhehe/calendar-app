@@ -1,13 +1,9 @@
-import React, { useState, useContext } from "react";
-import { Context } from "../../context/Context";
+import React from "react";
 
 import Section from "../../components/Section";
 import ActivityItem from "./ActivityItem";
 
-const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
-	// Context
-	const { activities, setActivities } = useContext(Context);
-
+const ActivitiesList = ({ setActivities, filterActivitiesByDateArray }) => {
 	const deleteActivity = (id) => {
 		setActivities((prev) => prev.filter((activity) => activity.id !== id));
 	};

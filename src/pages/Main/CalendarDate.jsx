@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { BsFillSuitDiamondFill, BsCircleFill } from "react-icons/bs";
 
@@ -12,6 +12,11 @@ const CalendarDate = ({
 	activities,
 	isActivitiesExist,
 }) => {
+	// State
+	const [toggle, setToggle] = useState(false);
+
+	// Function
+
 	// Variables
 	const sameMonth = isSameMonth(date, today);
 	const sameToday = isToday(date);
@@ -37,32 +42,37 @@ const CalendarDate = ({
 		countActivitiesInThisDateDone === countActivitiesInThisDate;
 
 	return (
-		<li
-			onClick={() => setSelectedDate(date)}
-			className={`relative flex items-center justify-center rounded-full w-8 h-8 
+		<>
+			<li
+				onClick={() => {
+					setSelectedDate(date);
+					setToggle((prev) => !prev);
+				}}
+				className={`relative flex items-center justify-center rounded-full w-8 h-8 
 					${sameMonth ? "" : "text-gray-300"}
 					${sameToday ? "bg-blue-300 text-white " : ""}
 					${sameSelectedAndToday ? " text-white bg-blue-500" : ""}
 					${sameSelected ? "bg-blue-400 text-white " : ""}
 			`}
-		>
-			{date.getDate()}
-			{isActivitiesInThisDate && (
-				<div
-					className={`absolute -bottom-1
+			>
+				{date.getDate()}
+				{isActivitiesInThisDate && (
+					<div
+						className={`absolute -bottom-1
 						${sameSelected ? "text-blue-800" : "text-blue-500"}
 						${isAllActivitiesInThisDateDone ? "text-green-300" : ""}
 						
 						`}
-				>
-					{isAllActivitiesInThisDateDone ? (
-						<BsCircleFill size="10" />
-					) : (
-						<BsFillSuitDiamondFill size="10" />
-					)}
-				</div>
-			)}
-		</li>
+					>
+						{isAllActivitiesInThisDateDone ? (
+							<BsCircleFill size="10" />
+						) : (
+							<BsFillSuitDiamondFill size="10" />
+						)}
+					</div>
+				)}
+			</li>
+		</>
 	);
 };
 

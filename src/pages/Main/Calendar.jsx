@@ -16,7 +16,7 @@ const Calendar = ({
 }) => {
 	return (
 		<Section>
-			<div className=" h-96">
+			<div className="h-96">
 				<div className="flex justify-between mt-4 mb-8 ">
 					<div className="flex items-center justify-between w-48 gap-4 text-gray-300 ">
 						<button
@@ -42,11 +42,11 @@ const Calendar = ({
 					</div>
 					<h2 className="mr-5 text-2xl sm:mr-2">{format(today, "YYY")}</h2>
 				</div>
-				<ul className="grid grid-cols-7 gap-3 mb-4 font-semibold">
+				<ul className="grid grid-cols-7 gap-4 mb-4 font-semibold">
 					{daysElement}
 				</ul>
 
-				<div className="grid grid-cols-7 gap-3 ">{dateElement}</div>
+				<div className="grid grid-cols-7 gap-4 ">{dateElement}</div>
 			</div>
 		</Section>
 	);
