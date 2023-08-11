@@ -45,7 +45,7 @@ const DateDetailsEvent = ({
 						<FaCrown />
 						Event
 					</h2>
-					<p className="mt-2">{detailsTextElement}</p>
+					<p className="mt-2 text-center">{detailsTextElement}</p>
 				</div>
 
 				<div className="flex w-full gap-1 pb-1 overflow-auto h-1/2 ">
@@ -53,7 +53,7 @@ const DateDetailsEvent = ({
 				</div>
 				<button
 					onClick={() => setToggleModalEventForm(true)}
-					className="absolute text-2xl top-2 right-2"
+					className="absolute text-2xl top-2 right-2 "
 				>
 					<BsPlusCircle />
 				</button>

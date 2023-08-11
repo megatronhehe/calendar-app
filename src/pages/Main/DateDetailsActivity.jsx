@@ -21,7 +21,7 @@ const DateDetailsActivity = ({
 			? "you have no tasks for today"
 			: `you have ${countTasks ? countTasks : "no"} task${
 					countTasks > 1 ? "s" : ""
-			  } for today!`;
+			  } for today`;
 	const isAllTasksComplete = countTasks > 0 && countTasksDone === countTasks;
 
 	const percentageTextElement =
@@ -39,9 +39,9 @@ const DateDetailsActivity = ({
 						<FaClipboardList />
 						Activities
 					</h2>
-					<p className="mt-2">{detailsTextElement}</p>
+					<p className="mt-2 text-center">{detailsTextElement}</p>
 					{countTasks > 0 && (
-						<p className="mt-2">
+						<p className="mt-2 ">
 							{isAllTasksComplete
 								? "All tasks are completed!"
 								: `${countTasksDone} / ${countTasks} tasks completed`}

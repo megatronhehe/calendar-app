@@ -1,6 +1,4 @@
-import React, { useState, createContext } from "react";
-
-import { activitiesData } from "../data/dummyActivitiesData";
+import React, { useState, createContext, useEffect } from "react";
 
 import {
 	eachDayOfInterval,
@@ -18,6 +16,19 @@ import {
 const Context = createContext();
 
 const ContextProvider = ({ children }) => {
+	const storedActivitiesData = localStorage.getItem("activities")
+		? JSON.parse(localStorage.getItem("activities")).map((activity) => ({
+				...activity,
+				date: new Date(activity.date),
+		  }))
+		: [];
+	const storedEventsData = localStorage.getItem("events")
+		? JSON.parse(localStorage.getItem("events")).map((event) => ({
+				...event,
+				date: new Date(event.date),
+		  }))
+		: [];
+
 	// States For Dates
 	const [today, setToday] = useState(new Date());
 	const [selectedDate, setSelectedDate] = useState(today);
@@ -27,10 +38,10 @@ const ContextProvider = ({ children }) => {
 	});
 
 	// States For Activities
-	const [activities, setActivities] = useState([]);
+	const [activities, setActivities] = useState(storedActivitiesData);
 
 	// States for Events
-	const [events, setEvents] = useState([]);
+	const [events, setEvents] = useState(storedEventsData);
 
 	// Variables
 	const firstDate = startOfWeek(startOfMonth(today));
@@ -49,6 +60,15 @@ const ContextProvider = ({ children }) => {
 	const filterEventsByDateArray =
 		isEventsExist &&
 		events.filter((event) => isSameDay(event.date, selectedDate));
+
+	// side effect to localstorage
+
+	useEffect(() => {
+		localStorage.setItem("activities", JSON.stringify(activities));
+		localStorage.setItem("events", JSON.stringify(events));
+	}, [activities, events]);
+
+	console.log(localStorage);
 
 	// Functions For Dates
 	const nextMonth = () => {
