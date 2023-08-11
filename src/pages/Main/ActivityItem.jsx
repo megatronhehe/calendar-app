@@ -8,8 +8,8 @@ import {
 	BsTrashFill,
 } from "react-icons/bs";
 
-const ActivityItem = ({ activity, deleteTask, markTaskDone }) => {
-	const { id, task, isDone } = activity;
+const ActivityItem = ({ activity, deleteActivity, markActivityDone }) => {
+	const { id, activity: task, isDone } = activity;
 
 	const [toggleDelete, setToggleDelete] = useState(false);
 
@@ -19,7 +19,7 @@ const ActivityItem = ({ activity, deleteTask, markTaskDone }) => {
 				className={`flex items-center gap-4 ${isDone ? "text-green-500" : ""}`}
 			>
 				<button
-					onClick={() => markTaskDone(id)}
+					onClick={() => markActivityDone(id)}
 					className={`ml-1 p-1 rounded-md  ${
 						isDone ? "bg-green-400 text-white" : "text-gray-300 bg-white"
 					}`}
@@ -32,7 +32,7 @@ const ActivityItem = ({ activity, deleteTask, markTaskDone }) => {
 				<div className="flex gap-2">
 					{toggleDelete && (
 						<button
-							onClick={() => deleteTask(id)}
+							onClick={() => deleteActivity(id)}
 							className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white bg-red-300 rounded-full`}
 						>
 							<BsCheck />

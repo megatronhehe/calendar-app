@@ -2,7 +2,12 @@ import React from "react";
 
 import { BsX } from "react-icons/bs";
 
-const ModalForm = ({ taskForm, handleTaskForm, setToggleModal, addTask }) => {
+const ModalForm = ({
+	activityForm,
+	handleActivityForm,
+	setToggleModal,
+	addActivity,
+}) => {
 	return (
 		<div
 			onClick={() => setToggleModal(false)}
@@ -16,35 +21,41 @@ const ModalForm = ({ taskForm, handleTaskForm, setToggleModal, addTask }) => {
 					onClick={(e) => e.stopPropagation()}
 					className="relative flex flex-col w-full max-w-sm gap-4 p-4 bg-white shadow-md rounded-xl "
 				>
-					<h1 className="text-center">New Task</h1>
+					<h1 className="text-center">New Activity</h1>
 					<form className="flex flex-col gap-4">
 						<div className="flex gap-4">
 							<input
 								className="w-2/3 p-2 bg-gray-100 outline-none rounded-xl"
 								type="text"
-								name="task"
-								value={taskForm.task}
-								onChange={handleTaskForm}
-								placeholder="task name"
+								name="activity"
+								value={activityForm.activity}
+								onChange={handleActivityForm}
+								placeholder="activity name"
 							/>
 							<input
 								className="w-1/3 p-2 bg-gray-100 outline-none rounded-xl"
 								type="date"
 								name="date"
-								onChange={handleTaskForm}
+								onChange={handleActivityForm}
 							/>
 						</div>
 
 						<button
-							disabled={!taskForm.task}
+							disabled={!activityForm.activity}
 							onClick={(e) => {
 								e.preventDefault();
-								addTask();
+								addActivity();
 								setToggleModal(false);
 							}}
 							className={`p-2 rounded-full  ${
-								!taskForm.task ? "bg-gray-100" : "bg-green-300 text-white"
-							} ${!taskForm.task ? "hover:bg-gray-200" : "hover:bg-green-400"}`}
+								!activityForm.activity
+									? "bg-gray-100"
+									: "bg-green-300 text-white"
+							} ${
+								!activityForm.activity
+									? "hover:bg-gray-200"
+									: "hover:bg-green-400"
+							}`}
 						>
 							ok
 						</button>

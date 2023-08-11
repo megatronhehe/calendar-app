@@ -18,42 +18,44 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 	const { activities, setActivities } = useContext(Context);
 
 	// initial_state
-	const initial_task_form = {
+	const initial_activity_form = {
 		id: "",
-		task: "",
+		activity: "",
 		date: "",
 		isDone: false,
 	};
 
 	// States
-	const [taskForm, setTaskForm] = useState(initial_task_form);
+	const [activityForm, setActivityForm] = useState(initial_activity_form);
 	const [toggleModal, setToggleModal] = useState(false);
 
-	const handleTaskForm = (e) => {
+	const handleActivityForm = (e) => {
 		const { value, name } = e.target;
-		setTaskForm((prev) => ({ ...prev, [name]: value }));
+		setActivityForm((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const addTask = () => {
+	const addActivity = () => {
 		setActivities((prev) => [
 			...prev,
 			{
 				id: createId(),
-				task: taskForm.task,
-				date: taskForm.date ? parseISO(taskForm.date) : selectedDate,
+				activity: activityForm.activity,
+				date: activityForm.date ? parseISO(activityForm.date) : selectedDate,
 			},
 		]);
-		setTaskForm(initial_task_form);
+		setActivityForm(initial_activity_form);
 	};
 
-	const deleteTask = (id) => {
-		setActivities((prev) => prev.filter((task) => task.id !== id));
+	const deleteActivity = (id) => {
+		setActivities((prev) => prev.filter((activity) => activity.id !== id));
 	};
 
-	const markTaskDone = (id) => {
+	const markActivityDone = (id) => {
 		setActivities((prev) =>
-			prev.map((task) =>
-				task.id === id ? { ...task, isDone: !task.isDone } : task
+			prev.map((activity) =>
+				activity.id === id
+					? { ...activity, isDone: !activity.isDone }
+					: activity
 			)
 		);
 	};
@@ -64,8 +66,8 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 			<ActivityItem
 				key={activity.id}
 				activity={activity}
-				deleteTask={deleteTask}
-				markTaskDone={markTaskDone}
+				deleteActivity={deleteActivity}
+				markActivityDone={markActivityDone}
 			/>
 		));
 
@@ -91,10 +93,10 @@ const ActivitiesList = ({ selectedDate, filterActivitiesByDateArray }) => {
 
 			{toggleModal && (
 				<ModalForm
-					taskForm={taskForm}
-					handleTaskForm={handleTaskForm}
+					activityForm={activityForm}
+					handleActivityForm={handleActivityForm}
 					setToggleModal={setToggleModal}
-					addTask={addTask}
+					addActivity={addActivity}
 				/>
 			)}
 		</Section>
