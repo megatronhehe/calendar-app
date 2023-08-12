@@ -1,7 +1,7 @@
 import React from "react";
 
-import NavbarMobile from "./components/NavbarMobile";
-import NavbarPC from "./components/NavbarPC";
+import NavbarPC from "./components/Navbar/NavbarPC";
+import NavbarMobile from "./components/Navbar/NavbarMobile";
 import Container from "./components/Container";
 
 import Main from "./pages/Main/Main";
