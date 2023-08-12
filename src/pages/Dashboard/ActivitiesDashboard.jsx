@@ -101,7 +101,11 @@ const ActivitiesDashboard = ({ isActivitiesExist, activities }) => {
 
 				<CategoryCard
 					title="Completed activities ratio"
-					count={`${countPercentage(activitiesDoneCount, activitiesCount)}%`}
+					count={`${
+						isActivitiesExist
+							? countPercentage(activitiesDoneCount, activitiesCount)
+							: "0"
+					}%`}
 					unit="Completed"
 					color="bg-blue-300"
 					fontColor="text-white"

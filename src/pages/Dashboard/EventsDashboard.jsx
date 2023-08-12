@@ -33,12 +33,12 @@ const EventsDashboard = ({ isEventsExist, events }) => {
 
 	const today = new Date();
 	const eventsCount = isEventsExist ? filteredEventsArray.length : 0;
-	const eventsAfterTodayCount =
-		isEventsExist &&
-		filteredEventsArray.filter((event) => isAfter(event.date, today)).length;
-	const eventsBeforeTodayCount =
-		isEventsExist &&
-		filteredEventsArray.filter((event) => isBefore(event.date, today)).length;
+	const eventsAfterTodayCount = isEventsExist
+		? filteredEventsArray.filter((event) => isAfter(event.date, today)).length
+		: 0;
+	const eventsBeforeTodayCount = isEventsExist
+		? filteredEventsArray.filter((event) => isBefore(event.date, today)).length
+		: 0;
 
 	return (
 		<div className="flex flex-col p-4 bg-white rounded-xl">

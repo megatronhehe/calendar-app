@@ -25,27 +25,29 @@ const Dashboard = () => {
 	const tomorrowDate = addDays(today, 1);
 
 	// activities variables
-	const todaysActivitiesArray =
-		isActivitiesExist &&
-		activities.filter((activity) => isSameDay(activity.date, today));
+	const todaysActivitiesArray = isActivitiesExist
+		? activities.filter((activity) => isSameDay(activity.date, today))
+		: [];
 
-	const tomorrowsActivitiesArray =
-		isActivitiesExist &&
-		activities.filter((activity) => isSameDay(activity.date, tomorrowDate));
+	const tomorrowsActivitiesArray = isActivitiesExist
+		? activities.filter((activity) => isSameDay(activity.date, tomorrowDate))
+		: [];
 
 	// events variables
-	const eventsAfterTodayArray =
-		isEventsExist && events.filter((event) => isAfter(event.date, today));
+	const eventsAfterTodayArray = isEventsExist
+		? events.filter((event) => isAfter(event.date, today))
+		: [];
 
 	const sortedEventsAfterTodayArray =
-		isEventsExist && sortDateAsc(eventsAfterTodayArray);
+		eventsAfterTodayArray.length > 0 ? sortDateAsc(eventsAfterTodayArray) : [];
 
 	const daysCountToUpcomingEvent =
-		isEventsExist &&
-		eachDayOfInterval({
-			start: today,
-			end: sortedEventsAfterTodayArray[0].date,
-		}).length - 1;
+		eventsAfterTodayArray.length > 0
+			? eachDayOfInterval({
+					start: today,
+					end: sortedEventsAfterTodayArray[0].date,
+			  }).length - 1
+			: 0;
 
 	// - count how many events in this week
 	const eventsInThisWeekCount = events.filter((event) =>
@@ -62,7 +64,7 @@ const Dashboard = () => {
 
 				<div className="flex justify-between w-full gap-2 pb-1 overflow-auto text-sm scroll-smooth sm:pb-0">
 					<MainCard
-						title="Upcoming Events"
+						title="Upcoming Events in . ."
 						count={daysCountToUpcomingEvent}
 						unit="Days"
 					/>
