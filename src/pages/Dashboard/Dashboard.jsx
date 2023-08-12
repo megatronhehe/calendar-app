@@ -1,37 +1,100 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../context/Context";
+import {
+	addDays,
+	isAfter,
+	format,
+	isSameDay,
+	eachDayOfInterval,
+	isThisWeek,
+	isBefore,
+} from "date-fns";
+
+import { sortDateAsc } from "../../utils/sortDateAsc";
+import { countPercentage } from "../../utils/countPercentage";
 
 const Dashboard = () => {
+	const { today, activities, events } = useContext(Context);
+
+	// other variables
+	const tomorrowDate = addDays(today, 1);
+
+	// activities variables
+	const todaysActivitiesArray = activities.filter((activity) =>
+		isSameDay(activity.date, today)
+	);
+	const tomorrowsActivitiesArray = activities.filter((activity) =>
+		isSameDay(activity.date, tomorrowDate)
+	);
+	const activitiesCount = activities.length;
+	const activitiesDoneCount = activities.filter(
+		(activity) => activity.isDone
+	).length;
+
+	// events variables
+	const eventsAfterTodayArray = events.filter((event) =>
+		isAfter(event.date, today)
+	);
+	const eventsBeforeTodayArray = events.filter((event) =>
+		isBefore(event.date, today)
+	);
+	const sortedEventsAfterTodayArray = sortDateAsc(eventsAfterTodayArray);
+	const daysCountToUpcomingEvent =
+		eachDayOfInterval({
+			start: today,
+			end: sortedEventsAfterTodayArray[0].date,
+		}).length - 1;
+
+	const eventsCount = events.length;
+	const eventsAfterTodayCount = eventsAfterTodayArray.length;
+	const eventsBeforeTodayCount = eventsBeforeTodayArray.length;
+
+	// - count how many events in this week
+	const eventsInThisWeekCount = events.filter((event) =>
+		isThisWeek(event.date)
+	).length;
+
+	console.log(eventsInThisWeekCount);
+
 	return (
 		<main className="relative mb-20 font-light">
 			<section className="flex flex-col gap-4 ">
 				<div className="flex flex-row items-center justify-between w-full py-4 rounded-xl">
 					<h2 className="text-2xl">Dashboard</h2>
-					<p>Saturday, 12 August 2023</p>
+					<p>{format(today, "EEEE, dd MMMM yyyy")}</p>
 				</div>
 
 				<div className="flex justify-between w-full gap-2 pb-1 overflow-auto text-sm scroll-smooth sm:pb-0">
 					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
 						<h2>Upcoming Events</h2>
 						<p className="text-sm">
-							in <span className="text-xl">8</span> Days
+							in <span className="text-xl">{daysCountToUpcomingEvent}</span>{" "}
+							Days
 						</p>
 					</div>
+
+					{/* Activities for today */}
 					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
 						<h2>Activities for today</h2>
 						<p className="text-xl ">
-							4 <span className="text-sm">Activities</span>
+							{todaysActivitiesArray.length}{" "}
+							<span className="text-sm">Activities</span>
 						</p>
 					</div>
+
+					{/* Activities for tomorrow */}
 					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
 						<h2>Activities for tomorrow</h2>
 						<p className="text-xl ">
-							7 <span className="text-sm">Activities</span>
+							{tomorrowsActivitiesArray.length}{" "}
+							<span className="text-sm">Activities</span>
 						</p>
 					</div>
+
 					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
 						<h2>Events for this week</h2>
 						<p className="text-xl">
-							2 <span className="text-sm">Events</span>
+							{eventsInThisWeekCount} <span className="text-sm">Events</span>
 						</p>
 					</div>
 				</div>
@@ -41,18 +104,25 @@ const Dashboard = () => {
 					<div className="flex gap-2 pb-1 mt-4 overflow-auto text-sm sm:pb-0">
 						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
 							<h2>Completed Activities Ratio</h2>
-							<p className="text-xl">89%</p>
+							<p className="text-xl">
+								{countPercentage(activitiesDoneCount, activitiesCount)}%
+							</p>
 						</div>
+
+						{/* total activities */}
 						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
 							<h2>Total activities listed</h2>
 							<p className="mt-4 text-xl">
-								30 <span className="text-sm">Activities</span>
+								{activitiesCount} <span className="text-sm">Activities</span>
 							</p>
 						</div>
+
+						{/* total activities completed */}
 						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
 							<h2>Total activities completed</h2>
 							<p className="mt-4 text-xl">
-								25 <span className="text-sm">Activities</span>
+								{activitiesDoneCount}{" "}
+								<span className="text-sm">Activities</span>
 							</p>
 						</div>
 					</div>
@@ -61,22 +131,27 @@ const Dashboard = () => {
 				<div className="flex flex-col p-4 bg-white rounded-xl">
 					<h1>Events Stats</h1>
 					<div className="flex gap-2 pb-1 mt-4 overflow-auto text-sm sm:pb-0">
+						{/* Total events count */}
 						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
 							<h2>Total events</h2>
 							<p className="text-xl">
-								10 <span className="text-sm">Events</span>
+								{eventsCount} <span className="text-sm">Events</span>
 							</p>
 						</div>
+
+						{/* total upcoming events count */}
 						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
 							<h2>Total upcoming events</h2>
 							<p className="mt-4 text-xl">
-								3 <span className="text-sm">Events</span>
+								{eventsAfterTodayCount} <span className="text-sm">Events</span>
 							</p>
 						</div>
+
+						{/* total past events count */}
 						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
 							<h2>Total past events</h2>
 							<p className="mt-4 text-xl">
-								7 <span className="text-sm">Events</span>
+								{eventsBeforeTodayCount} <span className="text-sm">Events</span>
 							</p>
 						</div>
 					</div>
