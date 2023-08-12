@@ -14,47 +14,56 @@ import { sortDateAsc } from "../../utils/sortDateAsc";
 import { countPercentage } from "../../utils/countPercentage";
 
 const Dashboard = () => {
-	const { today, activities, events } = useContext(Context);
+	const { today, activities, events, isActivitiesExist, isEventsExist } =
+		useContext(Context);
 
 	// other variables
 	const tomorrowDate = addDays(today, 1);
 
 	// activities variables
-	const todaysActivitiesArray = activities.filter((activity) =>
-		isSameDay(activity.date, today)
-	);
-	const tomorrowsActivitiesArray = activities.filter((activity) =>
-		isSameDay(activity.date, tomorrowDate)
-	);
-	const activitiesCount = activities.length;
-	const activitiesDoneCount = activities.filter(
-		(activity) => activity.isDone
-	).length;
+	const todaysActivitiesArray =
+		isActivitiesExist &&
+		activities.filter((activity) => isSameDay(activity.date, today));
+
+	const tomorrowsActivitiesArray =
+		isActivitiesExist &&
+		activities.filter((activity) => isSameDay(activity.date, tomorrowDate));
+
+	const activitiesCount = isActivitiesExist && activities.length;
+
+	const activitiesDoneCount =
+		isActivitiesExist &&
+		activities.filter((activity) => activity.isDone).length;
 
 	// events variables
-	const eventsAfterTodayArray = events.filter((event) =>
-		isAfter(event.date, today)
-	);
-	const eventsBeforeTodayArray = events.filter((event) =>
-		isBefore(event.date, today)
-	);
-	const sortedEventsAfterTodayArray = sortDateAsc(eventsAfterTodayArray);
+	const eventsAfterTodayArray =
+		isEventsExist && events.filter((event) => isAfter(event.date, today));
+
+	const eventsBeforeTodayArray =
+		isEventsExist && events.filter((event) => isBefore(event.date, today));
+
+	const sortedEventsAfterTodayArray =
+		isEventsExist && sortDateAsc(eventsAfterTodayArray);
+
 	const daysCountToUpcomingEvent =
+		isEventsExist &&
 		eachDayOfInterval({
 			start: today,
 			end: sortedEventsAfterTodayArray[0].date,
 		}).length - 1;
 
-	const eventsCount = events.length;
-	const eventsAfterTodayCount = eventsAfterTodayArray.length;
-	const eventsBeforeTodayCount = eventsBeforeTodayArray.length;
+	const eventsCount = isEventsExist ? events.length : 0;
+	const eventsAfterTodayCount = isEventsExist
+		? eventsAfterTodayArray.length
+		: 0;
+	const eventsBeforeTodayCount = isEventsExist
+		? eventsBeforeTodayArray.length
+		: 0;
 
 	// - count how many events in this week
 	const eventsInThisWeekCount = events.filter((event) =>
 		isThisWeek(event.date)
 	).length;
-
-	console.log(eventsInThisWeekCount);
 
 	return (
 		<main className="relative mb-20 font-light">
@@ -67,10 +76,14 @@ const Dashboard = () => {
 				<div className="flex justify-between w-full gap-2 pb-1 overflow-auto text-sm scroll-smooth sm:pb-0">
 					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
 						<h2>Upcoming Events</h2>
-						<p className="text-sm">
-							in <span className="text-xl">{daysCountToUpcomingEvent}</span>{" "}
-							Days
-						</p>
+						{daysCountToUpcomingEvent ? (
+							<p className="text-sm">
+								in <span className="text-xl">{daysCountToUpcomingEvent}</span>{" "}
+								Days
+							</p>
+						) : (
+							<p className="text-sm">No events listed {":("}</p>
+						)}
 					</div>
 
 					{/* Activities for today */}
