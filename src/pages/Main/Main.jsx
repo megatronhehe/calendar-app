@@ -179,6 +179,8 @@ const Main = () => {
 					<ActivitiesList
 						filterActivitiesByDateArray={filterActivitiesByDateArray}
 						setActivities={setActivities}
+						selectedDate={selectedDate}
+						activities={activities}
 					/>
 				</div>
 			</section>
