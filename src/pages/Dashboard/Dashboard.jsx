@@ -14,10 +14,11 @@ import { sortDateAsc } from "../../utils/sortDateAsc";
 import { countPercentage } from "../../utils/countPercentage";
 
 const Dashboard = () => {
-	const { today, activities, events, isActivitiesExist, isEventsExist } =
+	const { activities, events, isActivitiesExist, isEventsExist } =
 		useContext(Context);
 
 	// other variables
+	const today = new Date();
 	const tomorrowDate = addDays(today, 1);
 
 	// activities variables
@@ -74,6 +75,7 @@ const Dashboard = () => {
 				</div>
 
 				<div className="flex justify-between w-full gap-2 pb-1 overflow-auto text-sm scroll-smooth sm:pb-0">
+					{/* Upcoming events */}
 					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
 						<h2>Upcoming Events</h2>
 						{daysCountToUpcomingEvent ? (
