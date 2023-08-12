@@ -19,7 +19,7 @@ const DateDetailsEvent = ({
 		filterEventsByDateArray.map((event) => (
 			<div
 				key={event.id}
-				className="relative flex flex-col items-center justify-center h-12 font-semibold bg-yellow-200 rounded-md"
+				className="relative flex flex-col items-center justify-center flex-shrink-0 h-12 font-semibold bg-yellow-200 rounded-md"
 			>
 				<p className="p-3">{event.title}</p>
 				<button
@@ -31,11 +31,12 @@ const DateDetailsEvent = ({
 			</div>
 		));
 
-	const detailsTextElement = filterEventsByDateArray
-		? `you have ${
-				filterEventsByDateArray.length > 1 ? "events" : "an event"
-		  } today!`
-		: "nothing much really happening on this date . .";
+	const detailsTextElement =
+		filterEventsByDateArray.length > 0
+			? `you have ${
+					filterEventsByDateArray.length > 1 ? "events" : "an event"
+			  } on this date!`
+			: "nothing much really happening on this date . .";
 
 	return (
 		<section className="relative w-1/2 p-2 overflow-hidden text-gray-700 bg-yellow-300 rounded-xl">
@@ -48,7 +49,7 @@ const DateDetailsEvent = ({
 					<p className="mt-2 text-center">{detailsTextElement}</p>
 				</div>
 
-				<div className="flex w-full gap-1 pb-1 overflow-auto h-1/2 ">
+				<div className="flex w-full gap-1 pb-1 overflow-auto ">
 					{eventsElement}
 				</div>
 				<button

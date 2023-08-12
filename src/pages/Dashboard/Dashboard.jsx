@@ -10,8 +10,11 @@ import {
 	isBefore,
 } from "date-fns";
 
+import ActivitiesDashboard from "./ActivitiesDashboard";
+import EventsDashboard from "./EventsDashboard";
+import MainCard from "./MainCard";
+
 import { sortDateAsc } from "../../utils/sortDateAsc";
-import { countPercentage } from "../../utils/countPercentage";
 
 const Dashboard = () => {
 	const { activities, events, isActivitiesExist, isEventsExist } =
@@ -30,18 +33,9 @@ const Dashboard = () => {
 		isActivitiesExist &&
 		activities.filter((activity) => isSameDay(activity.date, tomorrowDate));
 
-	const activitiesCount = isActivitiesExist && activities.length;
-
-	const activitiesDoneCount =
-		isActivitiesExist &&
-		activities.filter((activity) => activity.isDone).length;
-
 	// events variables
 	const eventsAfterTodayArray =
 		isEventsExist && events.filter((event) => isAfter(event.date, today));
-
-	const eventsBeforeTodayArray =
-		isEventsExist && events.filter((event) => isBefore(event.date, today));
 
 	const sortedEventsAfterTodayArray =
 		isEventsExist && sortDateAsc(eventsAfterTodayArray);
@@ -52,14 +46,6 @@ const Dashboard = () => {
 			start: today,
 			end: sortedEventsAfterTodayArray[0].date,
 		}).length - 1;
-
-	const eventsCount = isEventsExist ? events.length : 0;
-	const eventsAfterTodayCount = isEventsExist
-		? eventsAfterTodayArray.length
-		: 0;
-	const eventsBeforeTodayCount = isEventsExist
-		? eventsBeforeTodayArray.length
-		: 0;
 
 	// - count how many events in this week
 	const eventsInThisWeekCount = events.filter((event) =>
@@ -75,102 +61,37 @@ const Dashboard = () => {
 				</div>
 
 				<div className="flex justify-between w-full gap-2 pb-1 overflow-auto text-sm scroll-smooth sm:pb-0">
-					{/* Upcoming events */}
-					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
-						<h2>Upcoming Events</h2>
-						{daysCountToUpcomingEvent ? (
-							<p className="text-sm">
-								in <span className="text-xl">{daysCountToUpcomingEvent}</span>{" "}
-								Days
-							</p>
-						) : (
-							<p className="text-sm">No events listed {":("}</p>
-						)}
-					</div>
+					<MainCard
+						title="Upcoming Events"
+						count={daysCountToUpcomingEvent}
+						unit="Days"
+					/>
 
-					{/* Activities for today */}
-					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
-						<h2>Activities for today</h2>
-						<p className="text-xl ">
-							{todaysActivitiesArray.length}{" "}
-							<span className="text-sm">Activities</span>
-						</p>
-					</div>
+					<MainCard
+						title="Activities for today"
+						count={todaysActivitiesArray.length}
+						unit="Activities"
+					/>
 
-					{/* Activities for tomorrow */}
-					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
-						<h2>Activities for tomorrow</h2>
-						<p className="text-xl ">
-							{tomorrowsActivitiesArray.length}{" "}
-							<span className="text-sm">Activities</span>
-						</p>
-					</div>
+					<MainCard
+						title="Activities for tomorrow"
+						count={tomorrowsActivitiesArray.length}
+						unit="Activities"
+					/>
 
-					<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-white sm:flex-shrink sm:w-1/4 rounded-xl">
-						<h2>Events for this week</h2>
-						<p className="text-xl">
-							{eventsInThisWeekCount} <span className="text-sm">Events</span>
-						</p>
-					</div>
+					<MainCard
+						title="Events for this week"
+						count={eventsInThisWeekCount}
+						unit="Events"
+					/>
 				</div>
 
-				<div className="flex flex-col p-4 bg-white rounded-xl">
-					<h1>Activities Stats</h1>
-					<div className="flex gap-2 pb-1 mt-4 overflow-auto text-sm sm:pb-0">
-						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
-							<h2>Completed Activities Ratio</h2>
-							<p className="text-xl">
-								{countPercentage(activitiesDoneCount, activitiesCount)}%
-							</p>
-						</div>
+				<ActivitiesDashboard
+					isActivitiesExist={isActivitiesExist}
+					activities={activities}
+				/>
 
-						{/* total activities */}
-						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
-							<h2>Total activities listed</h2>
-							<p className="mt-4 text-xl">
-								{activitiesCount} <span className="text-sm">Activities</span>
-							</p>
-						</div>
-
-						{/* total activities completed */}
-						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
-							<h2>Total activities completed</h2>
-							<p className="mt-4 text-xl">
-								{activitiesDoneCount}{" "}
-								<span className="text-sm">Activities</span>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div className="flex flex-col p-4 bg-white rounded-xl">
-					<h1>Events Stats</h1>
-					<div className="flex gap-2 pb-1 mt-4 overflow-auto text-sm sm:pb-0">
-						{/* Total events count */}
-						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
-							<h2>Total events</h2>
-							<p className="text-xl">
-								{eventsCount} <span className="text-sm">Events</span>
-							</p>
-						</div>
-
-						{/* total upcoming events count */}
-						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
-							<h2>Total upcoming events</h2>
-							<p className="mt-4 text-xl">
-								{eventsAfterTodayCount} <span className="text-sm">Events</span>
-							</p>
-						</div>
-
-						{/* total past events count */}
-						<div className="flex flex-col justify-between flex-shrink-0 w-32 h-32 p-4 bg-gray-100 sm:flex-shrink sm:w-full rounded-xl">
-							<h2>Total past events</h2>
-							<p className="mt-4 text-xl">
-								{eventsBeforeTodayCount} <span className="text-sm">Events</span>
-							</p>
-						</div>
-					</div>
-				</div>
+				<EventsDashboard isEventsExist={isEventsExist} events={events} />
 			</section>
 		</main>
 	);
