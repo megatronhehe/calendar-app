@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import {
 	addDays,
@@ -17,8 +17,15 @@ import MainCard from "./MainCard";
 import { sortDateAsc } from "../../utils/sortDateAsc";
 
 const Dashboard = () => {
-	const { activities, events, isActivitiesExist, isEventsExist } =
-		useContext(Context);
+	const {
+		activities,
+		events,
+		isActivitiesExist,
+		isEventsExist,
+		setSelectedDate,
+	} = useContext(Context);
+
+	const [clickCount, setClickCount] = useState(0);
 
 	// other variables
 	const today = new Date();
@@ -67,6 +74,7 @@ const Dashboard = () => {
 						title="Upcoming Events in . ."
 						count={daysCountToUpcomingEvent}
 						unit="Days"
+						setDateToNav={sortedEventsAfterTodayArray[0].date}
 					/>
 
 					<MainCard
@@ -79,12 +87,14 @@ const Dashboard = () => {
 						title="Activities for tomorrow"
 						count={tomorrowsActivitiesArray.length}
 						unit="Activities"
+						setDateToNav={tomorrowDate}
 					/>
 
 					<MainCard
 						title="Events for this week"
 						count={eventsInThisWeekCount}
 						unit="Events"
+						setDateToNav={sortedEventsAfterTodayArray[0].date}
 					/>
 				</div>
 
