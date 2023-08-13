@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { BsX } from "react-icons/bs";
 
+import { format } from "date-fns";
+
 const ModalEventForm = ({
+	initial_event_form,
 	eventForm,
+	setEventForm,
 	handleEventForm,
+	toggleModalEventForm,
 	setToggleModalEventForm,
 	addEvent,
 }) => {
+	useEffect(() => {
+		if (toggleModalEventForm) {
+			setEventForm(initial_event_form);
+		}
+	}, [toggleModalEventForm]);
+
 	return (
 		<div
 			onClick={() => setToggleModalEventForm(false)}
@@ -23,22 +34,28 @@ const ModalEventForm = ({
 				>
 					<h1 className="text-center">New Event</h1>
 					<form className="flex flex-col gap-4">
-						<div className="flex gap-4">
+						<div className="flex flex-col gap-4">
 							<input
 								autoFocus
-								className="w-2/3 p-2 bg-gray-100 outline-none rounded-xl"
+								className="p-2 bg-gray-100 outline-none  rounded-xl"
 								type="text"
 								name="title"
 								value={eventForm.title}
 								onChange={handleEventForm}
 								placeholder="event title"
 							/>
-							<input
-								className="w-1/3 p-2 bg-gray-100 outline-none rounded-xl"
-								type="date"
-								name="date"
-								onChange={handleEventForm}
-							/>
+							<div className="flex items-center gap-4">
+								<input
+									className="w-1/2 p-2 bg-gray-100 outline-none rounded-xl"
+									type="date"
+									name="date"
+									value={eventForm.date}
+									onChange={handleEventForm}
+								/>
+								<p className="w-1/2 text-center">
+									{format(new Date(eventForm.date), "EEE, dd MMM yyyy")}
+								</p>
+							</div>
 						</div>
 
 						<button

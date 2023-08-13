@@ -42,13 +42,13 @@ const Main = () => {
 	const initial_activity_form = {
 		id: "",
 		activity: "",
-		date: "",
+		date: selectedDate.toLocaleDateString("en-CA"),
 		isDone: false,
 	};
 	const initial_event_form = {
 		id: "",
 		title: "",
-		date: "",
+		date: selectedDate.toLocaleDateString("en-CA"),
 	};
 
 	// States
@@ -186,8 +186,11 @@ const Main = () => {
 			</section>
 			{toggleModalActivityForm && (
 				<ModalActivityForm
+					initial_activity_form={initial_activity_form}
 					activityForm={activityForm}
+					setActivityForm={setActivityForm}
 					handleActivityForm={handleActivityForm}
+					toggleModalActivityForm={toggleModalActivityForm}
 					setToggleModalActivityForm={setToggleModalActivityForm}
 					addActivity={addActivity}
 				/>
@@ -195,8 +198,11 @@ const Main = () => {
 
 			{toggleModalEventForm && (
 				<ModalEventForm
+					initial_event_form={initial_event_form}
 					eventForm={eventForm}
+					setEventForm={setEventForm}
 					handleEventForm={handleEventForm}
+					toggleModalEventForm={toggleModalEventForm}
 					setToggleModalEventForm={setToggleModalEventForm}
 					addEvent={addEvent}
 				/>

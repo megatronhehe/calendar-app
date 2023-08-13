@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { format } from "date-fns";
 
 import { BsX } from "react-icons/bs";
 
 const ModalActivityForm = ({
+	initial_activity_form,
 	activityForm,
+	setActivityForm,
 	handleActivityForm,
+	toggleModalActivityForm,
 	setToggleModalActivityForm,
 	addActivity,
 }) => {
+	useEffect(() => {
+		if (toggleModalActivityForm) {
+			setActivityForm(initial_activity_form);
+		}
+	}, [toggleModalActivityForm]);
+
 	return (
 		<div
 			onClick={() => setToggleModalActivityForm(false)}
@@ -23,22 +33,28 @@ const ModalActivityForm = ({
 				>
 					<h1 className="text-center">New Activity</h1>
 					<form className="flex flex-col gap-4">
-						<div className="flex gap-4">
+						<div className="flex flex-col gap-4">
 							<input
 								autoFocus
-								className="w-2/3 p-2 bg-gray-100 outline-none rounded-xl"
+								className="p-2 bg-gray-100 outline-none rounded-xl"
 								type="text"
 								name="activity"
 								value={activityForm.activity}
 								onChange={handleActivityForm}
 								placeholder="activity name"
 							/>
-							<input
-								className="w-1/3 p-2 bg-gray-100 outline-none rounded-xl"
-								type="date"
-								name="date"
-								onChange={handleActivityForm}
-							/>
+							<div className="flex items-center gap-4">
+								<input
+									className="w-1/2 p-2 bg-gray-100 outline-none rounded-xl"
+									type="date"
+									name="date"
+									value={activityForm.date}
+									onChange={handleActivityForm}
+								/>
+								<p className="w-1/2 text-center">
+									{format(new Date(activityForm.date), "EEE, dd MMM yyyy")}
+								</p>
+							</div>
 						</div>
 
 						<button
