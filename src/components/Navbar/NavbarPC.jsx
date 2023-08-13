@@ -6,8 +6,10 @@ import {
 	BsCalendar3,
 	BsFillBarChartFill,
 	BsFillCaretLeftFill,
+	BsFillInfoCircleFill,
+	BsChevronLeft,
+	BsChevronUp,
 } from "react-icons/bs";
-import { PiDiamondsFourFill } from "react-icons/pi";
 
 const NavbarPC = () => {
 	return (
@@ -16,7 +18,9 @@ const NavbarPC = () => {
 				<div className="flex flex-col items-start gap-8 text-xl ">
 					<NavLink className="ml-6" to="/">
 						<div className="flex flex-col items-center justify-center ">
-							<PiDiamondsFourFill /> <h2 className="text-base">CallendApp</h2>
+							<BsChevronLeft />
+							<BsChevronUp />
+							<h2 className="text-base">CallendApp</h2>
 						</div>
 					</NavLink>
 
@@ -37,6 +41,17 @@ const NavbarPC = () => {
 						{({ isActive }) => (
 							<div className="relative flex items-center gap-4 py-2 border-gray-100">
 								<BsFillBarChartFill /> <h2 className="text-base">Dashboard</h2>
+								{isActive && (
+									<BsFillCaretLeftFill className="absolute text-3xl text-gray-100 -right-3" />
+								)}
+							</div>
+						)}
+					</NavLink>
+
+					<NavLink className="w-40" to="/info">
+						{({ isActive }) => (
+							<div className="relative flex items-center gap-4 py-2 border-gray-100">
+								<BsFillInfoCircleFill /> <h2 className="text-base">Info</h2>
 								{isActive && (
 									<BsFillCaretLeftFill className="absolute text-3xl text-gray-100 -right-3" />
 								)}

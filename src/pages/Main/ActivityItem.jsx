@@ -79,24 +79,26 @@ const ActivityItem = ({ setActivities, activity }) => {
 				</form>
 			</div>
 			<div className="flex gap-2">
-				<div className="flex gap-2">
-					{toggleDelete && (
+				{!toggleEdit && (
+					<div className="flex gap-2">
+						{toggleDelete && (
+							<button
+								onClick={() => deleteActivity(id)}
+								className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white bg-red-300 rounded-full`}
+							>
+								<BsCheck />
+							</button>
+						)}
 						<button
-							onClick={() => deleteActivity(id)}
-							className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white bg-red-300 rounded-full`}
+							onClick={() => setToggleDelete((prev) => !prev)}
+							className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white  rounded-full ${
+								toggleDelete ? "bg-gray-300" : "bg-red-300"
+							}`}
 						>
-							<BsCheck />
+							{toggleDelete ? <BsX /> : <BsTrashFill />}
 						</button>
-					)}
-					<button
-						onClick={() => setToggleDelete((prev) => !prev)}
-						className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white  rounded-full ${
-							toggleDelete ? "bg-gray-300" : "bg-red-300"
-						}`}
-					>
-						{toggleDelete ? <BsX /> : <BsTrashFill />}
-					</button>
-				</div>
+					</div>
+				)}
 				<div className="border-r"></div>
 				<button
 					onClick={() => setToggleEdit((prev) => !prev)}
