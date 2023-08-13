@@ -74,7 +74,11 @@ const Dashboard = () => {
 						title="Upcoming Events in . ."
 						count={daysCountToUpcomingEvent}
 						unit="Days"
-						setDateToNav={sortedEventsAfterTodayArray[0].date}
+						setDateToNav={
+							eventsAfterTodayArray.length
+								? sortedEventsAfterTodayArray[0].date
+								: today
+						}
 					/>
 
 					<MainCard
@@ -94,7 +98,11 @@ const Dashboard = () => {
 						title="Events for this week"
 						count={eventsInThisWeekCount}
 						unit="Events"
-						setDateToNav={sortedEventsAfterTodayArray[0].date}
+						setDateToNav={
+							eventsAfterTodayArray.length
+								? sortedEventsAfterTodayArray[0].date
+								: today
+						}
 					/>
 				</div>
 
