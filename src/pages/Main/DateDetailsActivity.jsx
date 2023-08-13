@@ -10,27 +10,30 @@ const DateDetailsActivity = ({
 	setToggleModalActivityForm,
 }) => {
 	// Variables
-	const countTasks = filterActivitiesByDateArray.length;
-	const countTasksDone =
+	const countActivities = filterActivitiesByDateArray.length;
+	const countActivitiesDone =
 		filterActivitiesByDateArray.length > 0 &&
 		filterActivitiesByDateArray.filter((task) => task.isDone).length;
 
 	// Elements
 	const detailsTextElement =
-		countTasks < 1
+		countActivities < 1
 			? "no listed activities on this date . ."
-			: `you have ${countTasks ? countTasks : "no"} task${
-					countTasks > 1 ? "s" : ""
+			: `you have ${countActivities ? countActivities : "no"} activities${
+					countActivities > 1 ? "s" : ""
 			  } on this date`;
-	const isAllTasksComplete = countTasks > 0 && countTasksDone === countTasks;
+	const isAllActivitiesDone =
+		countActivities > 0 && countActivitiesDone === countActivities;
 
 	const percentageTextElement =
-		countTasks > 0 ? `${countPercentage(countTasksDone, countTasks)}%` : "0%";
+		countActivities > 0
+			? `${countPercentage(countActivitiesDone, countActivities)}%`
+			: "0%";
 
 	return (
 		<section
 			className={`relative p-2 w-1/2 rounded-xl ${
-				isAllTasksComplete ? "bg-green-400" : "bg-blue-500"
+				isAllActivitiesDone ? "bg-green-400" : "bg-blue-500"
 			}`}
 		>
 			<div className="flex flex-col justify-between h-40 gap-2 text-xs font-normal text-white sm:h-full">
@@ -40,20 +43,23 @@ const DateDetailsActivity = ({
 						Activities
 					</h2>
 					<p className="mt-2 text-center">{detailsTextElement}</p>
-					{countTasks > 0 && (
+					{countActivities > 0 && (
 						<p className="mt-2 ">
-							{isAllTasksComplete
+							{isAllActivitiesDone
 								? "All tasks are completed!"
-								: `${countTasksDone} / ${countTasks} tasks completed`}
+								: `${countActivitiesDone} / ${countActivities} tasks completed`}
 						</p>
 					)}
 				</div>
 				<div className="overflow-hidden text-lg font-semibold text-white bg-blue-400 rounded-xl">
-					{countTasks > 0 && (
+					{countActivities > 0 && (
 						<div
 							className="p-2 bg-green-300"
 							style={{
-								width: `${countPercentage(countTasksDone, countTasks)}%`,
+								width: `${countPercentage(
+									countActivitiesDone,
+									countActivities
+								)}%`,
 							}}
 						>
 							{percentageTextElement}

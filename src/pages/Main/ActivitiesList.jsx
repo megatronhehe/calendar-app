@@ -12,20 +12,6 @@ const ActivitiesList = ({
 }) => {
 	const [toggleMore, setToggleMore] = useState(false);
 
-	const deleteActivity = (id) => {
-		setActivities((prev) => prev.filter((activity) => activity.id !== id));
-	};
-
-	const markActivityDone = (id) => {
-		setActivities((prev) =>
-			prev.map((activity) =>
-				activity.id === id
-					? { ...activity, isDone: !activity.isDone }
-					: activity
-			)
-		);
-	};
-
 	const setAll = (check) => {
 		setActivities((prev) =>
 			prev.map((activity) =>
@@ -36,7 +22,7 @@ const ActivitiesList = ({
 		);
 	};
 
-	const deleteAll = (check) => {
+	const deleteAll = () => {
 		setActivities((prev) =>
 			prev.filter((activity) => !isSameDay(activity.date, selectedDate))
 		);
@@ -47,9 +33,8 @@ const ActivitiesList = ({
 		filterActivitiesByDateArray.map((activity) => (
 			<ActivityItem
 				key={activity.id}
+				setActivities={setActivities}
 				activity={activity}
-				deleteActivity={deleteActivity}
-				markActivityDone={markActivityDone}
 			/>
 		));
 

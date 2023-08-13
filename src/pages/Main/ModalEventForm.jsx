@@ -25,6 +25,7 @@ const ModalEventForm = ({
 					<form className="flex flex-col gap-4">
 						<div className="flex gap-4">
 							<input
+								autoFocus
 								className="w-2/3 p-2 bg-gray-100 outline-none rounded-xl"
 								type="text"
 								name="title"
