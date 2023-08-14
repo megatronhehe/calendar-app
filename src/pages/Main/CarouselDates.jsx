@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Section from "../../components/Section";
 
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { AnimatePresence, motion } from "framer-motion";
 import { getDate } from "date-fns";
 
 const Carousel5Days = ({
@@ -18,7 +17,15 @@ const Carousel5Days = ({
 		<Section>
 			<h2 className="mb-4">Last 5 days from today</h2>
 			<ul className="relative flex ">
-				{render5DaysElement}
+				<div
+					key={keyForChange}
+					initial={{ x: "-100vw" }}
+					animate={{ x: 0 }}
+					exit={{ x: "100vw" }}
+					className="flex w-full"
+				>
+					{render5DaysElement}
+				</div>
 				<button
 					onClick={prev5days}
 					className="absolute p-1 bg-gray-100 rounded-full -left-3 top-1/3 hover:bg-gray-200"

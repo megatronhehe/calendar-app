@@ -35,23 +35,35 @@ const Info = () => {
 						</p>
 						<ul className="flex flex-col gap-2 text-sm text-gray-500">
 							<li className="flex items-center w-full gap-4 p-2 bg-gray-100 rounded-full">
-								<FaCrown className="flex items-center justify-center w-8 h-8 p-2 text-yellow-300 bg-white rounded-full" />
+								<motion.div whileHover={{ scale: 1.6 }}>
+									<FaCrown className="flex items-center justify-center w-8 h-8 p-2 text-yellow-300 bg-white rounded-full" />
+								</motion.div>
 								<h3>important events</h3>
 							</li>
 							<li className="flex items-center w-full gap-4 p-2 bg-gray-100 rounded-full">
-								<BsCircleFill className="flex items-center justify-center w-8 h-8 p-2 text-yellow-300 bg-white rounded-full" />
+								<motion.div whileHover={{ scale: 1.6 }}>
+									<BsCircleFill className="flex items-center justify-center w-8 h-8 p-2 text-yellow-300 bg-white rounded-full" />
+								</motion.div>
 								<h3>every activities is completed </h3>
 							</li>
 							<li className="flex items-center w-full gap-4 p-2 bg-gray-100 rounded-full">
-								<BsFillSuitDiamondFill className="flex items-center justify-center w-8 h-8 p-2 text-blue-500 bg-white rounded-full" />
+								<motion.div whileHover={{ scale: 1.6 }}>
+									<BsFillSuitDiamondFill className="flex items-center justify-center w-8 h-8 p-2 text-blue-500 bg-white rounded-full" />
+								</motion.div>
 								<h3>activities not completed yet </h3>
 							</li>
 							<li className="flex items-center w-full gap-4 p-2 bg-gray-100 rounded-full">
-								<div className="flex items-center justify-center w-8 h-8 p-2 bg-blue-300 rounded-full"></div>
+								<motion.div
+									whileHover={{ scale: 1.6 }}
+									className="flex items-center justify-center w-8 h-8 p-2 bg-blue-300 rounded-full"
+								></motion.div>
 								<h3>today's date </h3>
 							</li>
 							<li className="flex items-center w-full gap-4 p-2 bg-gray-100 rounded-full">
-								<div className="flex items-center justify-center w-8 h-8 p-2 bg-blue-500 rounded-full"></div>
+								<motion.div
+									whileHover={{ scale: 1.6 }}
+									className="flex items-center justify-center w-8 h-8 p-2 bg-blue-500 rounded-full"
+								></motion.div>
 								<h3>selected date</h3>
 							</li>
 						</ul>
