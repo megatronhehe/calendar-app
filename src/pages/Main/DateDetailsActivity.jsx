@@ -4,6 +4,7 @@ import { countPercentage } from "../../utils/countPercentage";
 
 import { FaClipboardList } from "react-icons/fa";
 import { BsPlusCircle } from "react-icons/bs";
+import { AnimatePresence, motion } from "framer-motion";
 
 const DateDetailsActivity = ({
 	filterActivitiesByDateArray,
@@ -52,26 +53,35 @@ const DateDetailsActivity = ({
 					)}
 				</div>
 				<div className="overflow-hidden text-lg font-semibold text-white bg-blue-400 rounded-xl">
-					{countActivities > 0 && (
-						<div
-							className="p-2 bg-green-300"
-							style={{
-								width: `${countPercentage(
-									countActivitiesDone,
-									countActivities
-								)}%`,
-							}}
-						>
-							{percentageTextElement}
-						</div>
-					)}
+					<AnimatePresence>
+						{countActivities > 0 && (
+							<motion.div
+								initial={{
+									width: `${countPercentage(
+										countActivitiesDone,
+										countActivities
+									)}%`,
+								}}
+								animate={{
+									width: `${countPercentage(
+										countActivitiesDone,
+										countActivities
+									)}%`,
+								}}
+								className="p-2 bg-green-300"
+							>
+								{percentageTextElement}
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</div>
-				<button
+				<motion.button
+					whileHover={{ scale: 1.2 }}
 					onClick={() => setToggleModalActivityForm(true)}
 					className="absolute text-2xl top-2 right-2"
 				>
 					<BsPlusCircle />
-				</button>
+				</motion.button>
 			</div>
 		</section>
 	);

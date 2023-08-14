@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 
 import { BsX } from "react-icons/bs";
 
@@ -20,11 +21,20 @@ const ModalEventForm = ({
 	}, [toggleModalEventForm]);
 
 	return (
-		<div
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
 			onClick={() => setToggleModalEventForm(false)}
 			className="fixed top-0 left-0 z-20 w-full h-full gap-6 px-2 bg-gray-700 bg-opacity-60"
 		>
-			<div className="flex flex-col items-center justify-center h-full gap-2 -my-20">
+			<motion.div
+				initial={{ y: "-100vh" }}
+				animate={{ y: 0 }}
+				exit={{ y: "-100vh" }}
+				transition={{ type: "tween" }}
+				className="flex flex-col items-center justify-center h-full gap-2 -my-20"
+			>
 				<button className="flex items-center justify-center w-12 h-12 p-2 text-xl text-white bg-red-300 rounded-full hover:bg-red-400">
 					<BsX />
 				</button>
@@ -37,7 +47,7 @@ const ModalEventForm = ({
 						<div className="flex flex-col gap-4">
 							<input
 								autoFocus
-								className="p-2 bg-gray-100 outline-none  rounded-xl"
+								className="p-2 bg-gray-100 outline-none rounded-xl"
 								type="text"
 								name="title"
 								value={eventForm.title}
@@ -75,8 +85,8 @@ const ModalEventForm = ({
 						</button>
 					</form>
 				</div>
-			</div>
-		</div>
+			</motion.div>
+		</motion.div>
 	);
 };
 

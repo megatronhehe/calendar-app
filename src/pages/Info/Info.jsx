@@ -1,5 +1,7 @@
 import React from "react";
 
+import { motion } from "framer-motion";
+
 import { FaCrown } from "react-icons/fa";
 import {
 	BsCircleFill,
@@ -13,7 +15,13 @@ const Info = () => {
 	const today = new Date();
 
 	return (
-		<main className="relative mb-20 font-light">
+		<motion.main
+			initial={{ opacity: 0, y: -30 }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: -30 }}
+			transition={{ type: "tween" }}
+			className="relative mb-20 font-light"
+		>
 			<section className="flex flex-col gap-4 ">
 				<div className="flex flex-row items-center justify-between w-full py-4 rounded-xl">
 					<h1 className="text-2xl">Info</h1>
@@ -79,7 +87,7 @@ const Info = () => {
 					</div>
 				</div>
 			</section>
-		</main>
+		</motion.main>
 	);
 };
 

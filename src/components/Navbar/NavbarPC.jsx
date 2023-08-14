@@ -2,6 +2,8 @@ import React from "react";
 
 import { NavLink } from "react-router-dom";
 
+import { AnimatePresence, motion } from "framer-motion";
+
 import {
 	BsCalendar3,
 	BsFillBarChartFill,
@@ -30,9 +32,19 @@ const NavbarPC = () => {
 						{({ isActive }) => (
 							<div className="relative flex items-center gap-4 py-2 border-gray-100 ">
 								<BsCalendar3 /> <h2 className="text-base">Activities</h2>
-								{isActive && (
-									<BsFillCaretLeftFill className="absolute text-3xl text-gray-100 -right-3" />
-								)}
+								<AnimatePresence>
+									{isActive && (
+										<motion.div
+											initial={{ x: 20 }}
+											animate={{ x: 0 }}
+											transition={{ type: "tween" }}
+											exit={{ x: 10 }}
+											className="absolute text-3xl text-gray-100 -right-3"
+										>
+											<BsFillCaretLeftFill />
+										</motion.div>
+									)}
+								</AnimatePresence>
 							</div>
 						)}
 					</NavLink>
@@ -41,9 +53,19 @@ const NavbarPC = () => {
 						{({ isActive }) => (
 							<div className="relative flex items-center gap-4 py-2 border-gray-100">
 								<BsFillBarChartFill /> <h2 className="text-base">Dashboard</h2>
-								{isActive && (
-									<BsFillCaretLeftFill className="absolute text-3xl text-gray-100 -right-3" />
-								)}
+								<AnimatePresence>
+									{isActive && (
+										<motion.div
+											initial={{ x: 20 }}
+											animate={{ x: 0 }}
+											transition={{ type: "tween" }}
+											exit={{ x: 10 }}
+											className="absolute text-3xl text-gray-100 -right-3"
+										>
+											<BsFillCaretLeftFill />
+										</motion.div>
+									)}
+								</AnimatePresence>
 							</div>
 						)}
 					</NavLink>
@@ -52,9 +74,19 @@ const NavbarPC = () => {
 						{({ isActive }) => (
 							<div className="relative flex items-center gap-4 py-2 border-gray-100">
 								<BsFillInfoCircleFill /> <h2 className="text-base">Info</h2>
-								{isActive && (
-									<BsFillCaretLeftFill className="absolute text-3xl text-gray-100 -right-3" />
-								)}
+								<AnimatePresence>
+									{isActive && (
+										<motion.div
+											initial={{ x: 20 }}
+											animate={{ x: 0 }}
+											transition={{ type: "tween" }}
+											exit={{ x: 10 }}
+											className="absolute text-3xl text-gray-100 -right-3"
+										>
+											<BsFillCaretLeftFill />
+										</motion.div>
+									)}
+								</AnimatePresence>
 							</div>
 						)}
 					</NavLink>

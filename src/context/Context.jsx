@@ -102,6 +102,7 @@ const ContextProvider = ({ children }) => {
 				selectedDate,
 				setSelectedDate,
 				render5DaysArray,
+				dateCarousel,
 				nextMonth,
 				prevMonth,
 				prev5days,

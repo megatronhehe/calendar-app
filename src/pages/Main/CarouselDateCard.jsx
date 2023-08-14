@@ -5,6 +5,8 @@ import { isSameMonth, isToday, isSameDay, format } from "date-fns";
 import { BsSuitDiamondFill, BsCircleFill } from "react-icons/bs";
 import { FaCrown } from "react-icons/fa";
 
+import { motion } from "framer-motion";
+
 const CarouselDateCard = ({
 	date,
 	today,
@@ -48,8 +50,7 @@ const CarouselDateCard = ({
 	return (
 		<li
 			onClick={() => setSelectedDate(date)}
-			key={date}
-			className={`flex flex-col items-center border justify-center w-1/5 h-20 text-sm rounded-md 
+			className={`flex flex-col flex-shrink-0 items-center border justify-center w-1/5 h-20 text-sm rounded-md 
 					${sameMonth ? "" : "text-gray-300"}
 					${sameToday ? "bg-blue-300 border-blue-300 text-white " : ""}
 					${sameSelectedAndToday ? " text-white bg-blue-500 border-blue-500" : ""}

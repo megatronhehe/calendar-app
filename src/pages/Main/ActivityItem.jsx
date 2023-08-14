@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
 
 import {
@@ -81,14 +82,20 @@ const ActivityItem = ({ setActivities, activity }) => {
 			<div className="flex gap-2">
 				{!toggleEdit && (
 					<div className="flex gap-2">
-						{toggleDelete && (
-							<button
-								onClick={() => deleteActivity(id)}
-								className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white bg-red-300 rounded-full`}
-							>
-								<BsCheck />
-							</button>
-						)}
+						<AnimatePresence>
+							{toggleDelete && (
+								<motion.button
+									initial={{ x: 40, opacity: 0 }}
+									animate={{ x: 0, opacity: 1 }}
+									exit={{ x: 40, opacity: 0 }}
+									transition={{ type: "tween" }}
+									onClick={() => deleteActivity(id)}
+									className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white bg-red-300 rounded-full`}
+								>
+									<BsCheck />
+								</motion.button>
+							)}
+						</AnimatePresence>
 						<button
 							onClick={() => setToggleDelete((prev) => !prev)}
 							className={`flex items-center justify-center w-8 h-8 p-2 text-lg text-white  rounded-full ${

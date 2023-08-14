@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../../context/Context";
+
+import { motion } from "framer-motion";
+
 import {
 	addDays,
 	isAfter,
@@ -62,7 +65,13 @@ const Dashboard = () => {
 	).length;
 
 	return (
-		<main className="relative mb-20 font-light">
+		<motion.main
+			initial={{ opacity: 0, y: -30 }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: -30 }}
+			transition={{ type: "tween" }}
+			className="relative mb-20 font-light"
+		>
 			<section className="flex flex-col gap-4 ">
 				<div className="flex flex-row items-center justify-between w-full py-4 rounded-xl">
 					<h2 className="text-2xl">Dashboard</h2>
@@ -113,7 +122,7 @@ const Dashboard = () => {
 
 				<EventsDashboard isEventsExist={isEventsExist} events={events} />
 			</section>
-		</main>
+		</motion.main>
 	);
 };
 

@@ -3,8 +3,10 @@ import { Context } from "../../context/Context";
 
 import { createId } from "../../utils/createId";
 
-import parseISO from "date-fns/parseISO";
-import { format } from "date-fns";
+// parsisosdsaisaiasisaisaisaosaiosai
+import { format, parseISO } from "date-fns";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 import CalendarDate from "./CalendarDate";
 import CarouselDateCard from "./CarouselDateCard";
@@ -25,6 +27,7 @@ const Main = () => {
 		selectedDate,
 		setSelectedDate,
 		render5DaysArray,
+		dateCarousel,
 		nextMonth,
 		prevMonth,
 		prev5days,
@@ -134,7 +137,13 @@ const Main = () => {
 	});
 
 	return (
-		<div className="relative font-light sm:flex sm:gap-4">
+		<motion.main
+			initial={{ opacity: 0, y: -30 }}
+			animate={{ opacity: 1, y: 0 }}
+			exit={{ opacity: 0, y: -30 }}
+			transition={{ type: "tween" }}
+			className="relative font-light sm:flex sm:gap-4"
+		>
 			<section className="flex flex-col gap-4 sm:w-1/2">
 				{/* CALENDAR */}
 				<Calendar
@@ -151,6 +160,7 @@ const Main = () => {
 					prev5days={prev5days}
 					render5DaysElement={render5DaysElement}
 					next5days={next5days}
+					dateCarousel={dateCarousel}
 				/>
 			</section>
 
@@ -184,30 +194,34 @@ const Main = () => {
 					/>
 				</div>
 			</section>
-			{toggleModalActivityForm && (
-				<ModalActivityForm
-					initial_activity_form={initial_activity_form}
-					activityForm={activityForm}
-					setActivityForm={setActivityForm}
-					handleActivityForm={handleActivityForm}
-					toggleModalActivityForm={toggleModalActivityForm}
-					setToggleModalActivityForm={setToggleModalActivityForm}
-					addActivity={addActivity}
-				/>
-			)}
+			<AnimatePresence>
+				{toggleModalActivityForm && (
+					<ModalActivityForm
+						initial_activity_form={initial_activity_form}
+						activityForm={activityForm}
+						setActivityForm={setActivityForm}
+						handleActivityForm={handleActivityForm}
+						toggleModalActivityForm={toggleModalActivityForm}
+						setToggleModalActivityForm={setToggleModalActivityForm}
+						addActivity={addActivity}
+					/>
+				)}
+			</AnimatePresence>
 
-			{toggleModalEventForm && (
-				<ModalEventForm
-					initial_event_form={initial_event_form}
-					eventForm={eventForm}
-					setEventForm={setEventForm}
-					handleEventForm={handleEventForm}
-					toggleModalEventForm={toggleModalEventForm}
-					setToggleModalEventForm={setToggleModalEventForm}
-					addEvent={addEvent}
-				/>
-			)}
-		</div>
+			<AnimatePresence>
+				{toggleModalEventForm && (
+					<ModalEventForm
+						initial_event_form={initial_event_form}
+						eventForm={eventForm}
+						setEventForm={setEventForm}
+						handleEventForm={handleEventForm}
+						toggleModalEventForm={toggleModalEventForm}
+						setToggleModalEventForm={setToggleModalEventForm}
+						addEvent={addEvent}
+					/>
+				)}
+			</AnimatePresence>
+		</motion.main>
 	);
 };
 

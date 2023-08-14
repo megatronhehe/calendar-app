@@ -1,5 +1,7 @@
 import React from "react";
 
+import { motion } from "framer-motion";
+
 import { FaCrown } from "react-icons/fa";
 import { BsPlusCircle, BsX } from "react-icons/bs";
 
@@ -52,12 +54,13 @@ const DateDetailsEvent = ({
 				<div className="flex w-full gap-1 pb-1 overflow-auto ">
 					{eventsElement}
 				</div>
-				<button
+				<motion.button
+					whileHover={{ scale: 1.2 }}
 					onClick={() => setToggleModalEventForm(true)}
 					className="absolute text-2xl top-2 right-2 "
 				>
 					<BsPlusCircle />
-				</button>
+				</motion.button>
 			</div>
 		</section>
 	);

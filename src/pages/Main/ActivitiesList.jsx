@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { AnimatePresence, motion } from "framer-motion";
+
 import Section from "../../components/Section";
 import ActivityItem from "./ActivityItem";
 import { isSameDay } from "date-fns";
@@ -73,54 +75,62 @@ const ActivitiesList = ({
 					>
 						<BsThreeDotsVertical />
 					</button>
-					{toggleMore && (
-						<div className="absolute flex flex-col w-32 gap-1 p-1 text-xs text-gray-400 bg-gray-100 shadow-md rounded-xl right-4 top-4">
-							<button
-								onClick={() => setAll(true)}
-								className="flex items-center justify-between px-3 py-2 bg-white x-6 rounded-xl"
+
+					<AnimatePresence>
+						{toggleMore && (
+							<motion.div
+								initial={{ opacity: 0, y: -10 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -10 }}
+								className="absolute flex flex-col w-32 gap-1 p-1 text-xs text-gray-400 bg-gray-100 shadow-md rounded-xl right-4 top-4"
 							>
-								check all
-								<BsCheck className="text-base" />
-							</button>
-							<button
-								onClick={() => setAll(false)}
-								className="flex items-center justify-between px-3 py-2 bg-white x-6 rounded-xl"
-							>
-								uncheck all
-								<BsX className="text-base" />
-							</button>
-							<div className="my-1 border-b"></div>
-							<div>
-								{!toggleDelete ? (
-									<button
-										onClick={() => setToggleDelete(true)}
-										className="flex items-center justify-between w-full px-3 py-2 bg-white rounded-xl"
-									>
-										delete all
-										<BsFillTrash3Fill className="text-base" />
-									</button>
-								) : (
-									<div className="flex items-center w-full gap-2 px-3 py-2 bg-white rounded-xl">
+								<button
+									onClick={() => setAll(true)}
+									className="flex items-center justify-between px-3 py-2 bg-white x-6 rounded-xl"
+								>
+									check all
+									<BsCheck className="text-base" />
+								</button>
+								<button
+									onClick={() => setAll(false)}
+									className="flex items-center justify-between px-3 py-2 bg-white x-6 rounded-xl"
+								>
+									uncheck all
+									<BsX className="text-base" />
+								</button>
+								<div className="my-1 border-b"></div>
+								<div>
+									{!toggleDelete ? (
 										<button
-											onClick={() => setToggleDelete(false)}
-											className="flex justify-center w-1/2 text-base"
+											onClick={() => setToggleDelete(true)}
+											className="flex items-center justify-between w-full px-3 py-2 bg-white rounded-xl"
 										>
-											<BsX />
+											delete all
+											<BsFillTrash3Fill className="text-base" />
 										</button>
-										<button
-											onClick={() => {
-												deleteAll();
-												setToggleMore(false);
-											}}
-											className="flex justify-center w-1/2 text-base"
-										>
-											<BsCheck />
-										</button>
-									</div>
-								)}
-							</div>
-						</div>
-					)}
+									) : (
+										<div className="flex items-center w-full gap-2 px-3 py-2 bg-white rounded-xl">
+											<button
+												onClick={() => setToggleDelete(false)}
+												className="flex justify-center w-1/2 text-base"
+											>
+												<BsX />
+											</button>
+											<button
+												onClick={() => {
+													deleteAll();
+													setToggleMore(false);
+												}}
+												className="flex justify-center w-1/2 text-base"
+											>
+												<BsCheck />
+											</button>
+										</div>
+									)}
+								</div>
+							</motion.div>
+						)}
+					</AnimatePresence>
 				</div>
 
 				{filterActivitiesByDateArray.length > 0 ? (

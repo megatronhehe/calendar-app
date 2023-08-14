@@ -1,9 +1,11 @@
 import React from "react";
 
+import { isSameMonth, isToday, isSameDay } from "date-fns";
+
+import { AnimatePresence, motion } from "framer-motion";
+
 import { BsFillSuitDiamondFill, BsCircleFill } from "react-icons/bs";
 import { FaCrown } from "react-icons/fa";
-
-import { isSameMonth, isToday, isSameDay } from "date-fns";
 
 const CalendarDate = ({
 	date,
@@ -46,40 +48,67 @@ const CalendarDate = ({
 		isEventsExist && events.some((event) => isSameDay(event.date, date));
 
 	return (
-		<>
-			<li
-				onClick={() => setSelectedDate(date)}
-				className={`relative flex items-center justify-center rounded-full w-8 h-8 
+		<motion.li
+			whileHover={{ scale: 1.2 }}
+			onClick={() => setSelectedDate(date)}
+			className={`relative cursor-pointer flex items-center justify-center rounded-full w-8 h-8 
 					${sameMonth ? "" : "text-gray-300"}
 					${sameToday ? "bg-blue-300 text-white " : ""}
 					${sameSelectedAndToday ? " text-white bg-blue-500" : ""}
 					${sameSelected ? "bg-blue-400 text-white " : ""}
 			`}
-			>
-				{date.getDate()}
+		>
+			{date.getDate()}
+			<AnimatePresence>
 				{isActivitiesInThisDate && (
-					<div
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
 						className={`absolute -bottom-1
 						${sameSelected ? "text-blue-800" : "text-blue-500"}
 						${isAllActivitiesInThisDateDone ? "text-green-300" : ""}
 						
 						`}
 					>
-						{isAllActivitiesInThisDateDone ? (
-							<BsCircleFill size="10" />
-						) : (
-							<BsFillSuitDiamondFill size="10" />
-						)}
-					</div>
+						<AnimatePresence mode="wait">
+							{isAllActivitiesInThisDateDone ? (
+								<motion.div
+									key={isAllActivitiesInThisDateDone}
+									initial={{ scale: 1.5 }}
+									animate={{ scale: 1 }}
+									exit={{ scale: 1.5 }}
+								>
+									<BsCircleFill size="10" />
+								</motion.div>
+							) : (
+								<motion.div
+									key={isAllActivitiesInThisDateDone}
+									initial={{ scale: 1.5 }}
+									animate={{ scale: 1 }}
+									exit={{ scale: 1.5 }}
+								>
+									<BsFillSuitDiamondFill size="10" />
+								</motion.div>
+							)}
+						</AnimatePresence>
+					</motion.div>
 				)}
+			</AnimatePresence>
 
+			<AnimatePresence>
 				{isEventsInThisDate && (
-					<div className="absolute text-lg text-yellow-300 -top-3">
+					<motion.div
+						initial={{ scale: 1.5 }}
+						animate={{ scale: 1 }}
+						exit={{ scale: 1.5, opacity: 0 }}
+						className="absolute text-lg text-yellow-300 -top-3"
+					>
 						<FaCrown />
-					</div>
+					</motion.div>
 				)}
-			</li>
-		</>
+			</AnimatePresence>
+		</motion.li>
 	);
 };
 
