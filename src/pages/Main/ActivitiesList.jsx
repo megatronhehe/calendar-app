@@ -11,12 +11,14 @@ import {
 	BsCheck,
 	BsX,
 	BsFillTrash3Fill,
+	BsPlus,
 } from "react-icons/bs";
 
 const ActivitiesList = ({
 	setActivities,
 	filterActivitiesByDateArray,
 	selectedDate,
+	setToggleModalActivityForm,
 }) => {
 	// States
 	const [toggleMore, setToggleMore] = useState(false);
@@ -84,6 +86,15 @@ const ActivitiesList = ({
 								exit={{ opacity: 0, y: -10 }}
 								className="absolute flex flex-col w-32 gap-1 p-1 text-xs text-gray-400 bg-gray-100 shadow-md rounded-xl right-4 top-4"
 							>
+								<button
+									onClick={() => {
+										setToggleModalActivityForm(true);
+									}}
+									className="flex items-center justify-between px-3 py-2 bg-white x-6 rounded-xl"
+								>
+									new activity
+									<BsPlus className="text-base" />
+								</button>
 								<button
 									onClick={() => setAll(true)}
 									className="flex items-center justify-between px-3 py-2 bg-white x-6 rounded-xl"

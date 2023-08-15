@@ -191,6 +191,7 @@ const Main = () => {
 						setActivities={setActivities}
 						selectedDate={selectedDate}
 						activities={activities}
+						setToggleModalActivityForm={setToggleModalActivityForm}
 					/>
 				</div>
 			</section>
