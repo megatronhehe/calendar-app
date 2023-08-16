@@ -10,6 +10,7 @@ import {
 	isSameDay,
 	eachDayOfInterval,
 	isThisWeek,
+	isToday,
 	isBefore,
 } from "date-fns";
 
@@ -44,6 +45,10 @@ const Dashboard = () => {
 		: [];
 
 	// events variables
+	const isEventsExistToday =
+		isEventsExist &&
+		events.filter((event) => isToday(event.date, today)).length > 0;
+
 	const eventsAfterTodayArray = isEventsExist
 		? events.filter((event) => isAfter(event.date, today))
 		: [];
@@ -81,7 +86,7 @@ const Dashboard = () => {
 				<div className="flex justify-between w-full gap-2 pb-1 overflow-auto text-sm scroll-smooth sm:pb-0">
 					<MainCard
 						title="Upcoming Events in . ."
-						count={daysCountToUpcomingEvent}
+						count={isEventsExistToday ? "Today!" : daysCountToUpcomingEvent}
 						unit="Days"
 						setDateToNav={
 							eventsAfterTodayArray.length
