@@ -1,6 +1,6 @@
 import React from "react";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { FaCrown } from "react-icons/fa";
 import { BsPlusCircle, BsX } from "react-icons/bs";
@@ -19,7 +19,10 @@ const DateDetailsEvent = ({
 	const eventsElement =
 		filterEventsByDateArray &&
 		filterEventsByDateArray.map((event) => (
-			<div
+			<motion.div
+				initial={{ opacity: 0, y: -10 }}
+				animate={{ opacity: 1, y: 0 }}
+				exit={{ opacity: 0, y: -10 }}
 				key={event.id}
 				className="relative flex flex-col items-center justify-center flex-shrink-0 h-12 font-semibold bg-yellow-200 rounded-md"
 			>
@@ -30,7 +33,7 @@ const DateDetailsEvent = ({
 				>
 					<BsX />
 				</button>
-			</div>
+			</motion.div>
 		));
 
 	const detailsTextElement =
@@ -52,7 +55,7 @@ const DateDetailsEvent = ({
 				</div>
 
 				<div className="flex w-full gap-1 pb-1 overflow-auto ">
-					{eventsElement}
+					<AnimatePresence>{eventsElement}</AnimatePresence>
 				</div>
 				<motion.button
 					whileHover={{ scale: 1.2 }}
