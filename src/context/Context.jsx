@@ -33,8 +33,8 @@ const ContextProvider = ({ children }) => {
 	const [today, setToday] = useState(new Date());
 	const [selectedDate, setSelectedDate] = useState(today);
 	const [dateCarousel, setDateCarousel] = useState({
-		start: subDays(today, 4),
-		end: today,
+		start: startOfWeek(today),
+		end: endOfWeek(today),
 	});
 
 	// States For Activities
@@ -47,7 +47,7 @@ const ContextProvider = ({ children }) => {
 	const firstDate = startOfWeek(startOfMonth(today));
 	const lastDate = endOfWeek(endOfMonth(today));
 	const dateOfMonth = eachDayOfInterval({ start: firstDate, end: lastDate });
-	const render5DaysArray = eachDayOfInterval(dateCarousel);
+	const renderWeekdays = eachDayOfInterval(dateCarousel);
 
 	// Variables for activities
 	const isActivitiesExist = activities.length > 0;
@@ -77,17 +77,17 @@ const ContextProvider = ({ children }) => {
 		setToday((prev) => subMonths(prev, 1));
 	};
 
-	const prev5days = () => {
+	const prevWeek = () => {
 		setDateCarousel((prev) => ({
-			start: subDays(prev.start, 5),
-			end: subDays(prev.end, 5),
+			start: subDays(prev.start, 7),
+			end: subDays(prev.end, 7),
 		}));
 	};
 
-	const next5days = () => {
+	const nextWeek = () => {
 		setDateCarousel((prev) => ({
-			start: addDays(prev.start, 5),
-			end: addDays(prev.end, 5),
+			start: addDays(prev.start, 7),
+			end: addDays(prev.end, 7),
 		}));
 	};
 
@@ -101,12 +101,12 @@ const ContextProvider = ({ children }) => {
 				dateOfMonth,
 				selectedDate,
 				setSelectedDate,
-				render5DaysArray,
+				renderWeekdays,
 				dateCarousel,
 				nextMonth,
 				prevMonth,
-				prev5days,
-				next5days,
+				prevWeek,
+				nextWeek,
 				activities,
 				setActivities,
 				isActivitiesExist,

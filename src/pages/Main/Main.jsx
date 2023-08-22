@@ -26,12 +26,12 @@ const Main = () => {
 		dateOfMonth,
 		selectedDate,
 		setSelectedDate,
-		render5DaysArray,
+		renderWeekdays,
 		dateCarousel,
 		nextMonth,
 		prevMonth,
-		prev5days,
-		next5days,
+		prevWeek,
+		nextWeek,
 		activities,
 		setActivities,
 		isActivitiesExist,
@@ -121,7 +121,7 @@ const Main = () => {
 		);
 	});
 
-	const render5DaysElement = render5DaysArray.map((date) => {
+	const renderWeekdaysElement = renderWeekdays.map((date) => {
 		return (
 			<CarouselDateCard
 				key={date}
@@ -157,9 +157,9 @@ const Main = () => {
 
 				{/* DATE CAROUSEL */}
 				<CarouselDates
-					prev5days={prev5days}
-					render5DaysElement={render5DaysElement}
-					next5days={next5days}
+					prevWeek={prevWeek}
+					renderWeekdaysElement={renderWeekdaysElement}
+					nextWeek={nextWeek}
 					dateCarousel={dateCarousel}
 				/>
 			</section>
