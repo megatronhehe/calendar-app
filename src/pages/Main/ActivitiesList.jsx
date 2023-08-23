@@ -66,7 +66,7 @@ const ActivitiesList = ({
 
 	return (
 		<Section>
-			<div className="h-full pr-2 ">
+			<div className="pr-2 h-80 sm:h-full ">
 				<div className="relative flex items-center justify-between w-full mb-4 ">
 					<h2 className="">Activities</h2>
 					<button

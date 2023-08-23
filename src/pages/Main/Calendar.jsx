@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Section from "../../components/Section";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { format } from "date-fns";
 
@@ -45,25 +45,32 @@ const Calendar = ({
 
 	return (
 		<>
-			<button
-				onClick={() => setToggleShow((prev) => !prev)}
-				className={`fixed top-0 z-30 flex items-center justify-center gap-2 px-3 py-1 ml-4 text-sm text-gray-400 bg-white shadow-lg rounded-b-xl left-1/3 ${
-					windowWidth >= 640 ? "invisible" : "visible"
-				}`}
-			>
-				{toggleShow ? (
-					<>
-						hide calendar <BsChevronBarUp />
-					</>
-				) : (
-					<>
-						show calendar <BsChevronBarDown />
-					</>
-				)}
-			</button>
-			{toggleShow && (
-				<Section>
-					<div className="fixed top-0 left-0 z-20 w-full p-4 bg-white shadow-lg h-1/2 sm:h-96 sm:static rounded-b-xl sm:shadow-none">
+			<div className="fixed top-0 left-0 z-30 flex justify-center w-full">
+				<button
+					onClick={() => setToggleShow((prev) => !prev)}
+					className={`flex items-center justify-center gap-2 px-3 py-1 text-sm text-gray-400 rounded-b-xl bg-white shadow-md ${
+						windowWidth >= 640 ? "invisible" : "visible"
+					}`}
+				>
+					{toggleShow ? (
+						<>
+							hide calendar <BsChevronBarUp />
+						</>
+					) : (
+						<>
+							show calendar <BsChevronBarDown />
+						</>
+					)}
+				</button>
+			</div>
+			<AnimatePresence initial="false">
+				{toggleShow && (
+					<motion.div
+						initial={{ opacity: 0, y: -80 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -80 }}
+						className="fixed top-0 left-0 z-20 w-full p-4 bg-white shadow-lg h-1/2 sm:h-full sm:static rounded-b-xl sm:rounded-xl sm:shadow-none"
+					>
 						<div className="flex justify-between mt-4 mb-6 ">
 							<div className="flex items-center justify-between w-48 gap-4 text-gray-300 ">
 								<button
@@ -94,9 +101,9 @@ const Calendar = ({
 						</ul>
 
 						<div className="grid grid-cols-7 gap-4 ">{dateElement}</div>
-					</div>
-				</Section>
-			)}
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</>
 	);
 };

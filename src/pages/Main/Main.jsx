@@ -142,7 +142,7 @@ const Main = () => {
 			animate={{ opacity: 1, y: 0 }}
 			exit={{ opacity: 0, y: -30 }}
 			transition={{ type: "tween" }}
-			className="relative font-light sm:flex sm:gap-4"
+			className="relative mt-8 font-light sm:mt-0 sm:flex sm:gap-4"
 		>
 			<section className="flex flex-col gap-4 sm:w-1/2">
 				{/* CALENDAR */}
