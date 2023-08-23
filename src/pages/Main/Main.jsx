@@ -165,36 +165,46 @@ const Main = () => {
 			</section>
 
 			{/* ACTIVITIES */}
-			<section className="flex flex-col gap-4 mt-4 mb-20 sm:mb-0 sm:w-1/2 sm:mt-0">
-				<div className="flex justify-between p-4 text-white bg-gray-600 rounded-xl">
-					<h2>
-						{format(selectedDate, "EEEE")} <span></span>
-					</h2>
-					<h3>{format(selectedDate, "dd MMMM yyyy")}</h3>
-				</div>
+			<AnimatePresence mode="wait">
+				<motion.section
+					key={selectedDate}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					transition={{ duration: 0.2 }}
+					className="flex flex-col gap-4 mt-4 mb-20 sm:mb-0 sm:w-1/2 sm:mt-0"
+				>
+					<div className="flex justify-between p-4 text-white bg-gray-600 rounded-xl">
+						<h2>
+							{format(selectedDate, "EEEE")} <span></span>
+						</h2>
+						<h3>{format(selectedDate, "dd MMMM yyyy")}</h3>
+					</div>
 
-				<div className="flex gap-2 h-2/5">
-					<DateDetailsActivity
-						setToggleModalActivityForm={setToggleModalActivityForm}
-						filterActivitiesByDateArray={filterActivitiesByDateArray}
-					/>
-					<DateDetailsEvent
-						setToggleModalEventForm={setToggleModalEventForm}
-						filterEventsByDateArray={filterEventsByDateArray}
-						setEvents={setEvents}
-					/>
-				</div>
+					<div className="flex gap-2 h-2/5">
+						<DateDetailsActivity
+							setToggleModalActivityForm={setToggleModalActivityForm}
+							filterActivitiesByDateArray={filterActivitiesByDateArray}
+						/>
+						<DateDetailsEvent
+							setToggleModalEventForm={setToggleModalEventForm}
+							filterEventsByDateArray={filterEventsByDateArray}
+							setEvents={setEvents}
+						/>
+					</div>
 
-				<div className="h-full">
-					<ActivitiesList
-						filterActivitiesByDateArray={filterActivitiesByDateArray}
-						setActivities={setActivities}
-						selectedDate={selectedDate}
-						activities={activities}
-						setToggleModalActivityForm={setToggleModalActivityForm}
-					/>
-				</div>
-			</section>
+					<div className="h-full">
+						<ActivitiesList
+							filterActivitiesByDateArray={filterActivitiesByDateArray}
+							setActivities={setActivities}
+							selectedDate={selectedDate}
+							activities={activities}
+							setToggleModalActivityForm={setToggleModalActivityForm}
+						/>
+					</div>
+				</motion.section>
+			</AnimatePresence>
+
 			<AnimatePresence>
 				{toggleModalActivityForm && (
 					<ModalActivityForm

@@ -69,6 +69,7 @@ const Calendar = ({
 						initial={{ opacity: 0, y: -80 }}
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -80 }}
+						transition={{ type: "tween" }}
 						className="fixed top-0 left-0 z-20 w-full p-4 bg-white shadow-lg h-1/2 sm:h-full sm:static rounded-b-xl sm:rounded-xl sm:shadow-none"
 					>
 						<div className="flex justify-between mt-4 mb-6 ">
