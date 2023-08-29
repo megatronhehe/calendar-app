@@ -26,16 +26,13 @@ const Calendar = ({
 		const handleResize = () => {
 			setWindowWidth(window.innerWidth);
 		};
-
 		window.addEventListener("resize", handleResize);
-
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};
 	}, []);
 
 	useEffect(() => {
-		// Set toggleShow to true if window width is 640px or less
 		if (windowWidth >= 640) {
 			setToggleShow(true);
 		} else {
@@ -70,7 +67,7 @@ const Calendar = ({
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: -80 }}
 						transition={{ type: "tween" }}
-						className="fixed top-0 left-0 z-20 w-full p-4 bg-white shadow-lg h-1/2 sm:h-full sm:static rounded-b-xl sm:rounded-xl sm:shadow-none"
+						className="fixed top-0 left-0 z-20 w-full p-4 bg-white shadow-lg h-2/3 sm:h-full sm:static rounded-b-xl sm:rounded-xl sm:shadow-none"
 					>
 						<div className="flex justify-between mt-4 mb-6 ">
 							<div className="flex items-center justify-between w-48 gap-4 text-gray-300 ">
